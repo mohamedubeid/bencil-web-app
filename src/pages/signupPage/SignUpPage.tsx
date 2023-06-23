@@ -8,14 +8,18 @@ import { Link } from 'react-router-dom';
 const SignUpPage: React.FC = () => {
   const classes = SignUpPageStyle();
   return (
-    <Box sx={ classes.container }>
-      <Box sx={ classes.signup_form_container }>
-        <img src="/images/logo.svg" alt="bencil-logo" style={ classes.logo } />
+    <Box sx={classes.container}>
+      <Box sx={classes.signup_form_container}>
+        <img src="/images/logo.svg" alt="bencil-logo" style={classes.logo} />
         <Typography variant="h1"> Welcome to Bencil</Typography>
-        <Typography variant="subtitle1">Create an account or<Link to='/login' style={ classes.login_style }>login</Link></Typography>
-        <SignUpForm />
+        <Typography variant="subtitle1">Create an account or<Link to='/login' style={classes.login_style}>login</Link></Typography>
+        <Box>
+          <SignUpForm />
+        </Box>
       </Box>
-      <ImageSlider />
+      <Box sx={classes.image_slider_container}>
+        <ImageSlider />
+      </Box>
     </Box>
   );
 };

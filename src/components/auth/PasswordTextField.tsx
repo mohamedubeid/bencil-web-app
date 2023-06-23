@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
@@ -8,7 +8,7 @@ interface PasswordTextFieldProps {
   placeholder: string;
   // name: string;
   // value: string;
-  // onChange: ( event: ChangeEvent<HTMLInputElement> ) => void;
+  // onChange: ( event: React.ChangeEvent<HTMLInputElement> ) => void;
 }
 
 const PasswordTextField: React.FC<PasswordTextFieldProps> = ( {
@@ -24,19 +24,19 @@ const PasswordTextField: React.FC<PasswordTextFieldProps> = ( {
     <TextField
       fullWidth
       size='small'
-      placeholder={ placeholder }
+      placeholder={placeholder}
       variant="outlined"
-      type={ showPassword ? 'text' : 'password' }
+      type={showPassword ? 'text' : 'password'}
       // value={ value }
       // name={ name }
       // onChange={ onChange }
-      InputProps={ {
+      InputProps={{
         endAdornment: (
-          <IconButton onClick={ handleClickShowPassword } edge="end">
-            { showPassword ? <Visibility /> : <VisibilityOff /> }
+          <IconButton onClick={handleClickShowPassword} edge="end">
+            {showPassword ? <Visibility /> : <VisibilityOff />}
           </IconButton>
         ),
-      } }
+      }}
     />
   );
 };

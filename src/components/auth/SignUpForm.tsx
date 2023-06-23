@@ -1,27 +1,36 @@
-import { useState } from 'react';
-import SignUpFormStyle from './SignUpForm.module';
 import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import PasswordTextField from '../ui/PasswordTextField';
+import Checkbox from '@mui/material/Checkbox';
+import PasswordTextField from './PasswordTextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import InputField from './InputField';
+import Profession from './ProfessionSelectField';
+import Button from '@mui/material/Button';
 
-interface FormData {
-  password: string;
-  // Add other form fields here
-}
+// interface FormData {
+//   password: string;
+//   // Add other form fields here
+// }
 
 const SignUpForm: React.FC = () => {
-  const classes = SignUpFormStyle();
-  const [ showPassword, setShowPassword ] = useState( false );
-  const handleClickShowPassword = () => setShowPassword( !showPassword );
   return (
-    <Stack component='form' mt='16px' direction='column' spacing='8px' >
+    <Stack component='form' mt='32px' direction='column' spacing='16px'>
       <Stack direction='row' spacing='8px'>
-        <TextField fullWidth size='small' placeholder='First Name' variant="outlined" />
-        <TextField fullWidth placeholder='Last Name' variant="outlined" size='small' />
+        <InputField placeholder='First Name' />
+        <InputField placeholder='Last Name' />
       </Stack>
+      <InputField placeholder='Email' />
       <PasswordTextField placeholder='Password' />
       <PasswordTextField placeholder='Confirm Password' />
-      <TextField fullWidth size='small' placeholder='Email' variant="outlined" />
+      <InputField placeholder='username' startAdornment='@' />
+      <Profession />
+      <InputField placeholder='Birth Date' type='date' />
+      <FormControlLabel
+        control={<Checkbox
+        // name="getEmails" checked={signupForm.getEmails} onChange={handleChange}
+        />}//handle here
+        label="Get useful tips and updates via email"
+      />
+      <Button variant='contained' size='large'>Join Now</Button>
     </Stack>
   );
 };
