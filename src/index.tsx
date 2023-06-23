@@ -3,17 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { CssBaseline } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
+import { createTheme } from './components/theme/theme';
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
-
-Amplify.configure(awsExports);
+import { BrowserRouter } from 'react-router-dom';
+Amplify.configure( awsExports );
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById( 'root' ) as HTMLElement
 );
+const theme = createTheme();
 root.render(
   <React.StrictMode>
-    <CssBaseline />
-    <App />
+    <ThemeProvider theme={ theme }>
+      <CssBaseline />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>
 );
