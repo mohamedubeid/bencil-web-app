@@ -2,7 +2,6 @@ import { useTheme, Theme } from '@mui/material/styles';
 
 const SignUpPageStyle = () => {
   const theme: Theme = useTheme();
-  console.log( theme.palette, 'theme theme theme ' )
   return {
     container: {
       display: 'flex',
