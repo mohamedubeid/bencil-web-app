@@ -12,8 +12,6 @@ import { SignUpData, INITIAL_SIGN_UP_DATA } from '../../interfaces/user';
 const SignUpForm: React.FC = () => {
   const [ signUpData, setSignUpData ] = useState<SignUpData>( INITIAL_SIGN_UP_DATA );
 
-  console.log( signUpData, 'signUpData' );
-
   const handleProfessionChange = (
     event: SelectChangeEvent<string[]>
   ) => {
