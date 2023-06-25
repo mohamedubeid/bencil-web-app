@@ -1,38 +1,35 @@
 import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Checkbox from '@mui/material/Checkbox';
+import FormHelperText from '@mui/material/FormHelperText';
+import { ProfessionProps } from '../../interfaces/auth.interface';
 
 const professions: string[] = [ 'professions1', 'professions2', 'professions3', 'professions4', 'professions5', 'professions6', 'professions7', 'professions8', 'professions9', 'professions10', 'professions11' ]
-
-interface ProfessionProps {
-  placeholder: string;
-  name: string;
-  value: string[]
-  onChange: ( event: SelectChangeEvent<string[]> ) => void;
-  handleCheckboxChange: ( event: React.ChangeEvent<HTMLInputElement>, profession: string ) => void;
-}
 
 const ProfessionSelectField: React.FC<ProfessionProps> = ( {
   placeholder,
   name,
   onChange,
   handleCheckboxChange,
-  value
+  value,
+  helperText,
+  error
 } ) => {
 
   return (
-    <FormControl fullWidth size='small'>
+    <FormControl fullWidth size='small' error={error} >
       {value.length === 0 && (
         <InputLabel shrink={false} id="profession-label">
           {placeholder}
         </InputLabel>
       )}
       <Select
+
         id="profession"
         multiple
         name={name}
@@ -66,6 +63,7 @@ const ProfessionSelectField: React.FC<ProfessionProps> = ( {
           </MenuItem>
         ) )}
       </Select>
+      {error && <FormHelperText>{helperText}</FormHelperText>}
     </FormControl>
   );
 };

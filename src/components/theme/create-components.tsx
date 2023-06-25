@@ -22,7 +22,15 @@ export const createComponents = () => {
         //   // }
         // }
       }
-    }
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontSize: '10px',
+          fontWeight: '600'
+        },
+      },
+    },
   }
 
 }

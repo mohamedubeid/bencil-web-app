@@ -3,19 +3,15 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
-interface PasswordTextFieldProps {
-  placeholder: string;
-  name: string;
-  value: string;
-  onChange: ( event: React.ChangeEvent<HTMLInputElement> ) => void;
-}
+import { PasswordTextFieldProps } from '../../interfaces/auth.interface';
 
 const PasswordTextField: React.FC<PasswordTextFieldProps> = ( {
   placeholder,
   name,
   value,
-  onChange
+  onChange,
+  helperText,
+  error
 } ) => {
   const [ showPassword, setShowPassword ] = useState( false );
   const handleClickShowPassword = () => setShowPassword( !showPassword );
@@ -30,6 +26,8 @@ const PasswordTextField: React.FC<PasswordTextFieldProps> = ( {
       value={value}
       name={name}
       onChange={onChange}
+      error={error}
+      helperText={helperText}
       autoComplete="new-password"
       InputProps={{
         endAdornment: (

@@ -1,14 +1,6 @@
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-
-interface InputFieldProps {
-  type?: string;
-  placeholder: string;
-  startAdornment?: React.ReactNode;
-  name: string;
-  value: string;
-  onChange: ( event: React.ChangeEvent<HTMLInputElement> ) => void;
-}
+import { InputFieldProps } from '../../interfaces/auth.interface';
 
 const InputField: React.FC<InputFieldProps> = ( {
   type,
@@ -16,7 +8,9 @@ const InputField: React.FC<InputFieldProps> = ( {
   startAdornment,
   name,
   value,
-  onChange
+  onChange,
+  helperText,
+  error
 } ) => {
   return (
     <TextField
@@ -37,6 +31,8 @@ const InputField: React.FC<InputFieldProps> = ( {
       name={name}
       value={value}
       onChange={onChange}
+      error={error}
+      helperText={helperText}
     />
   );
 };

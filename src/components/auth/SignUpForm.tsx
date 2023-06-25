@@ -7,10 +7,13 @@ import InputField from './InputField';
 import ProfessionSelectField from './ProfessionSelectField';
 import Button from '@mui/material/Button';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { SignUpData, INITIAL_SIGN_UP_DATA } from '../../interfaces/user';
+import { SignUpData, INITIAL_SIGN_UP_DATA } from '../../interfaces/auth.interface';
+import { SignUpDataSchema } from '../../schema/auth.schema';
+
 
 const SignUpForm: React.FC = () => {
   const [ signUpData, setSignUpData ] = useState<SignUpData>( INITIAL_SIGN_UP_DATA );
+  const [ validationError, setValidationError ] = useState<{ [ key: string ]: string } | undefined>( undefined );
 
   const handleProfessionChange = (
     event: SelectChangeEvent<string[]>
@@ -43,7 +46,6 @@ const SignUpForm: React.FC = () => {
       }
     } );
   };
-
   const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent<string[]> ) => {
     const { name, value } = event.target;
     setSignUpData( ( prevData ) => ( {
@@ -54,24 +56,97 @@ const SignUpForm: React.FC = () => {
 
   const handleSubmit = ( event: React.FormEvent<HTMLFormElement> ) => {
     event.preventDefault();
-    console.log( signUpData );
-    setSignUpData( INITIAL_SIGN_UP_DATA );
+    console.log( { ...signUpData, username: `@${signUpData.username}` } );
+    try {
+      const { error } = SignUpDataSchema.validate( signUpData, {
+        abortEarly: false,
+      } );
+      if ( !error ) {
+        setValidationError( undefined );
+        setSignUpData( INITIAL_SIGN_UP_DATA );
+        return
+      } else {
+        const newErrors: { [ key: string ]: string } = {};
+        error.details.forEach( ( detail ) => {
+          const path = detail.path[ 0 ] as keyof SignUpData;
+          const message = detail.message;
+          newErrors[ path ] = message;
+        } );
+        setValidationError( newErrors );
+        return
+      }
+    } catch ( error ) {
+      console.log( error );
+    }
   };
   return (
     <Stack component='form' mt='32px' direction='column' spacing='16px' onSubmit={handleSubmit}>
       <Stack direction='row' spacing='8px'>
-        <InputField placeholder='First Name' name='first_name' value={signUpData.first_name} onChange={handleInputChange} />
-        <InputField placeholder='Last Name' name='last_name' value={signUpData.last_name} onChange={handleInputChange} />
+        <InputField
+          placeholder='First Name'
+          name='first_name'
+          value={signUpData.first_name}
+          onChange={handleInputChange}
+          error={!!validationError?.first_name}
+          helperText={validationError?.first_name || ''} />
+        <InputField
+          placeholder='Last Name'
+          name='last_name'
+          value={signUpData.last_name}
+          onChange={handleInputChange}
+          error={!!validationError?.last_name}
+          helperText={validationError?.last_name || ''} />
       </Stack>
-      <InputField placeholder='Email' name='email' value={signUpData.email} onChange={handleInputChange} />
-      <PasswordTextField placeholder='Password' name='password' value={signUpData.password} onChange={handleInputChange} />
-      <PasswordTextField placeholder='Confirm Password' name='confirm_password' value={signUpData.confirm_password} onChange={handleInputChange} />
-      <InputField placeholder='username' startAdornment='@' name='username' value={signUpData.username} onChange={handleInputChange} />
-      <ProfessionSelectField placeholder='Professions' name='professions' value={signUpData.professions} onChange={handleProfessionChange} handleCheckboxChange={handleCheckboxChange} />
-      <InputField placeholder='Birth Date' type='date' name='birth_date' value={signUpData.birth_date} onChange={handleInputChange} />
+      <InputField
+        placeholder='Email'
+        name='email'
+        value={signUpData.email}
+        onChange={handleInputChange}
+        error={!!validationError?.email}
+        helperText={validationError?.email || ''} />
+      <PasswordTextField
+        placeholder='Password'
+        name='password'
+        value={signUpData.password}
+        onChange={handleInputChange}
+        error={!!validationError?.password}
+        helperText={validationError?.password || ''} />
+      <PasswordTextField
+        placeholder='Confirm Password'
+        name='confirm_password'
+        value={signUpData.confirm_password}
+        onChange={handleInputChange}
+        error={!!validationError?.confirm_password}
+        helperText={validationError?.confirm_password || ''} />
+      <InputField
+        placeholder='username'
+        startAdornment='@'
+        name='username'
+        value={signUpData.username}
+        onChange={handleInputChange}
+        error={!!validationError?.username}
+        helperText={validationError?.username || ''} />
+      <ProfessionSelectField
+        placeholder='Professions'
+        name='professions'
+        value={signUpData.professions}
+        onChange={handleProfessionChange}
+        handleCheckboxChange={handleCheckboxChange}
+        error={!!validationError?.professions}
+        helperText={validationError?.professions || ''} />
+      <InputField
+        placeholder='Birth Date'
+        type='date'
+        name='birth_date'
+        value={signUpData.birth_date}
+        onChange={handleInputChange}
+        error={!!validationError?.birth_date}
+        helperText={validationError?.birth_date || ''} />
       <FormControlLabel
         control={<Checkbox
-          name="news_letter" checked={signUpData.news_letter} onChange={( e ) => setSignUpData( ( prevData ) => ( { ...prevData, news_letter: e.target.checked } ) )}
+          name="news_letter"
+          checked={signUpData.news_letter}
+          onChange={( e ) => setSignUpData( ( prevData ) => ( { ...prevData, news_letter: e.target.checked } ) )}
         />}
         label="Get useful tips and updates via email"
       />
