@@ -1,4 +1,3 @@
-import React, { ChangeEvent, useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
@@ -8,51 +7,39 @@ import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Checkbox from '@mui/material/Checkbox';
 
-const professions = [ 'professions1', 'professions2', 'professions3', 'professions4', 'professions5', 'professions6', 'professions7', 'professions8', 'professions9', 'professions10', 'professions11' ]
+const professions: string[] = [ 'professions1', 'professions2', 'professions3', 'professions4', 'professions5', 'professions6', 'professions7', 'professions8', 'professions9', 'professions10', 'professions11' ]
 
-// interface ProfessionProps {
-//   professions: string[];
-// }
+interface ProfessionProps {
+  placeholder: string;
+  name: string;
+  value: string[]
+  onChange: ( event: SelectChangeEvent<string[]> ) => void;
+  handleCheckboxChange: ( event: React.ChangeEvent<HTMLInputElement>, profession: string ) => void;
+}
 
-const ProfessionSelectField: React.FC = () => {
-  const [ selectedProfessions, setSelectedProfessions ] = useState<string[]>( [] );
-
-  const handleProfessionChange = (
-    event: SelectChangeEvent<string[]>
-  ) => {
-    // setSelectedProfessions( event.target.value as string[] );
-    setSelectedProfessions( event.target.value as string[] || [] );
-  };
-
-  const handleCheckboxChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    profession: string
-  ) => {
-    const isChecked = event.target.checked;
-    if ( isChecked ) {
-      setSelectedProfessions( ( prevSelection ) => [ ...prevSelection, profession ] );
-    } else {
-      setSelectedProfessions( ( prevSelection ) =>
-        prevSelection.filter( ( selectedProfession ) => selectedProfession !== profession )
-      );
-    }
-  };
+const ProfessionSelectField: React.FC<ProfessionProps> = ( {
+  placeholder,
+  name,
+  onChange,
+  handleCheckboxChange,
+  value
+} ) => {
 
   return (
-    <FormControl fullWidth size='small'
-    >
-      {selectedProfessions.length === 0 && (
+    <FormControl fullWidth size='small'>
+      {value.length === 0 && (
         <InputLabel shrink={false} id="profession-label">
-          Profession
+          {placeholder}
         </InputLabel>
       )}
       <Select
         id="profession"
         multiple
-        value={selectedProfessions}
-        onChange={handleProfessionChange}
+        name={name}
+        value={value}
+        onChange={onChange}
         input={<OutlinedInput id="profession-select" />}
-        renderValue={( selected ) => (
+        renderValue={( selected: string[] ) => (
           <Box display='flex' flexWrap='wrap' gap='4px'>
             {( selected as string[] ).map( ( value ) => (
               <Chip key={value} label={value} />
@@ -72,7 +59,7 @@ const ProfessionSelectField: React.FC = () => {
             <Checkbox
               sx={{ p: '4px' }}
               size='small'
-              checked={selectedProfessions.includes( profession )}
+              checked={value.includes( profession )}
               onChange={( e ) => handleCheckboxChange( e, profession )}
             />
             {profession}

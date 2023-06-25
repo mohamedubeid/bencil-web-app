@@ -6,16 +6,16 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 interface PasswordTextFieldProps {
   placeholder: string;
-  // name: string;
-  // value: string;
-  // onChange: ( event: React.ChangeEvent<HTMLInputElement> ) => void;
+  name: string;
+  value: string;
+  onChange: ( event: React.ChangeEvent<HTMLInputElement> ) => void;
 }
 
 const PasswordTextField: React.FC<PasswordTextFieldProps> = ( {
   placeholder,
-  // name,
-  // value,
-  // onChange
+  name,
+  value,
+  onChange
 } ) => {
   const [ showPassword, setShowPassword ] = useState( false );
   const handleClickShowPassword = () => setShowPassword( !showPassword );
@@ -27,9 +27,10 @@ const PasswordTextField: React.FC<PasswordTextFieldProps> = ( {
       placeholder={placeholder}
       variant="outlined"
       type={showPassword ? 'text' : 'password'}
-      // value={ value }
-      // name={ name }
-      // onChange={ onChange }
+      value={value}
+      name={name}
+      onChange={onChange}
+      autoComplete="new-password"
       InputProps={{
         endAdornment: (
           <IconButton onClick={handleClickShowPassword} edge="end">

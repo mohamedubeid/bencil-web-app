@@ -15,12 +15,10 @@ const root = ReactDOM.createRoot(
 );
 const theme = createTheme();
 root.render(
-  <React.StrictMode>
-    <ThemeProvider theme={ theme }>
-      <CssBaseline />
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThemeProvider>
-  </React.StrictMode>
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ThemeProvider>
 );

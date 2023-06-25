@@ -5,12 +5,18 @@ interface InputFieldProps {
   type?: string;
   placeholder: string;
   startAdornment?: React.ReactNode;
+  name: string;
+  value: string;
+  onChange: ( event: React.ChangeEvent<HTMLInputElement> ) => void;
 }
 
 const InputField: React.FC<InputFieldProps> = ( {
   type,
   placeholder,
   startAdornment,
+  name,
+  value,
+  onChange
 } ) => {
   return (
     <TextField
@@ -28,6 +34,9 @@ const InputField: React.FC<InputFieldProps> = ( {
           <InputAdornment position="start">{startAdornment}</InputAdornment>
         ),
       }}
+      name={name}
+      value={value}
+      onChange={onChange}
     />
   );
 };
