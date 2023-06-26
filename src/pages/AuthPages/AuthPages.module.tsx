@@ -1,6 +1,6 @@
 import { useTheme, Theme } from '@mui/material/styles';
 
-const SignUpPageStyle = () => {
+const AuthPagesStyle = () => {
   const theme: Theme = useTheme();
   return {
     container: {
@@ -11,8 +11,8 @@ const SignUpPageStyle = () => {
       flexDirection: { xs: 'column', md: 'row' },
 
     },
-    signup_form_container: {
-      margin: '48px 56px 0px 48px',
+    form_container: {
+      margin: '32px 32px 0px 32px',
       flex: 1,
       maxWidth: '530px',
       minWidth: '300px,'
@@ -22,15 +22,14 @@ const SignUpPageStyle = () => {
       display: { xs: 'none', md: 'block' }
     },
     logo: {
-      width: '150px',
-      height: '60px',
+      width: '130px',
     },
     login_style: {
       color: theme.palette.primary.main,
       paddingLeft: '4px',
       textDecoration: 'none',
-    }
+    },
   };
 };
 
-export default SignUpPageStyle;
+export default AuthPagesStyle;

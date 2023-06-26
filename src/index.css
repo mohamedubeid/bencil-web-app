@@ -5,6 +5,12 @@
   box-sizing: border-box;
   font-family: Montserrat, sans-serif;
 }
+a {
+  /* Add your custom styles for the Link component here */
+  color: #000; /* Example: changing the link color to black */
+  text-decoration: none;
+  /* ... add more styles as needed */
+}
 
 ::-webkit-scrollbar {
   width: 8px;

@@ -8,7 +8,7 @@ import ProfessionSelectField from './ProfessionSelectField';
 import Button from '@mui/material/Button';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { SignUpData, INITIAL_SIGN_UP_DATA } from '../../interfaces/auth.interface';
-import { SignUpDataSchema } from '../../schema/auth.schema';
+import SignUpDataSchema from '../../schema/SignUp.schema';
 
 
 const SignUpForm: React.FC = () => {
@@ -46,7 +46,7 @@ const SignUpForm: React.FC = () => {
       }
     } );
   };
-  const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent<string[]> ) => {
+  const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
     const { name, value } = event.target;
     setSignUpData( ( prevData ) => ( {
       ...prevData,

@@ -24,13 +24,25 @@ export const INITIAL_SIGN_UP_DATA: SignUpData = {
   news_letter: false,
 };
 
+export interface LogInData {
+  email: string;
+  password: string;
+  remember_me: boolean;
+}
+
+export const INITIAL_LOG_IN_DATA: LogInData = {
+  email: '',
+  password: '',
+  remember_me: false,
+};
+
 interface BaseInputFieldsProps {
   placeholder: string;
   name: string;
-  value: string;
-  error: boolean | undefined;
-  helperText: React.ReactNode;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  error?: boolean | undefined;
+  helperText?: React.ReactNode;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface InputFieldProps extends BaseInputFieldsProps {

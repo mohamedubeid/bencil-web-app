@@ -3,7 +3,7 @@ export const createTypography = () => {
     fontFamily: 'Montserrat, sans-serif',
     h1: {
       fontSize: 35,
-      fontWeight: 700,
+      fontWeight: 600,
     },
     h2: {
       fontSize: 36,
@@ -43,8 +43,8 @@ export const createTypography = () => {
       lineHeight: 1.75
     },
     subtitle2: {
-      fontSize: 14,
-      fontWeight: 500,
+      fontSize: 12,
+      fontWeight: 400,
       letterSpacing: 0,
       lineHeight: 1.75
     },

@@ -1,105 +1,76 @@
-import React, { useState } from 'react';
-import {
-  TextField,
-  Button,
-  Container,
-  Typography,
-  Grid,
-  Snackbar,
-} from '@mui/material';
+import React, { useRef, ChangeEvent, KeyboardEvent } from 'react';
+import TextField from '@mui/material/TextField';
+import { Box, Typography } from '@mui/material';
 
-const VerifyEmailPage = () => {
-  const [ verificationCode, setVerificationCode ] = useState( '' );
-  const [ isVerified, setIsVerified ] = useState( false );
-  const [ isSnackbarOpen, setIsSnackbarOpen ] = useState( false );
+interface VerificationCodeInputProps {
+  codeLength: number;
+}
 
-  const handleVerificationCodeChange = ( event: any ) => {
-    setVerificationCode( event.target.value );
-  };
+const VerifyEmailInput: React.FC<VerificationCodeInputProps> = ( {
+  codeLength,
+} ) => {
+  const codeInputRefs = useRef<HTMLInputElement[]>( [] );
 
-  const handleVerifyEmail = () => {
-    // Simulate server-side verification
-    // Replace this with your actual verification logic
+  const handleCodeChange = ( index: number, event: ChangeEvent<HTMLInputElement> ) => {
+    const input = event.target;
+    const nextInput = codeInputRefs.current[ index + 1 ];
 
-    // For demo purposes, we'll consider '123456' as the valid verification code
-    if ( verificationCode === '123456' ) {
-      setIsVerified( true );
-      setIsSnackbarOpen( true );
-    } else {
-      setIsVerified( false );
-      setIsSnackbarOpen( true );
+    // Auto-advance to the next input
+    if ( input.value && nextInput ) {
+      nextInput.focus();
     }
   };
 
-  const handleContinueWithoutVerify = () => {
-    // Handle the case where the user chooses to continue without verification
-    // Replace this with your desired logic
-    setIsVerified( true );
+  const handleCodeKeyDown = ( index: number, event: KeyboardEvent<HTMLInputElement> ) => {
+    const input = event.target as HTMLInputElement;
+    const previousInput = codeInputRefs.current[ index - 1 ];
+
+    // Move to the previous input if the current input is empty and Backspace key is pressed
+    if ( !input.value && previousInput && event.key === 'Backspace' ) {
+      previousInput.focus();
+    }
   };
 
-  const handleSnackbarClose = () => {
-    setIsSnackbarOpen( false );
+  const renderCodeInputs = () => {
+    const codeInputs: JSX.Element[] = [];
+
+    for ( let i = 0; i < codeLength; i++ ) {
+      codeInputs.push(
+        <TextField
+          sx={{
+            width: '40px',
+            margin: 1,
+            '& input': {
+              textAlign: 'center',
+              fontSize: '1.5rem',
+            },
+          }}
+          key={i}
+          inputRef={( ref: HTMLInputElement ) => ( codeInputRefs.current[ i ] = ref )}
+          inputProps={{
+            maxLength: 1,
+          }}
+          onChange={( e: ChangeEvent<HTMLInputElement> ) => handleCodeChange( i, e )}
+          onKeyDown={( e: KeyboardEvent<HTMLInputElement> ) => handleCodeKeyDown( i, e )}
+        />
+      );
+    }
+
+    return codeInputs;
   };
 
+  return <div>{renderCodeInputs()}</div>;
+};
+
+
+const VerifyEmailPage = () => {
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h4" align="center" gutterBottom>
-        Verify Email
-      </Typography>
-      {!isVerified ? (
-        <>
-          <Typography variant="body1" align="center">
-            Please enter the verification code you received:
-          </Typography>
-          <Grid container spacing={2} justifyContent="center" mt={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                id="verificationCode"
-                label="Verification Code"
-                variant="outlined"
-                fullWidth
-                value={verificationCode}
-                onChange={handleVerificationCodeChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                onClick={handleVerifyEmail}
-              >
-                Verify
-              </Button>
-            </Grid>
-          </Grid>
-          <Button
-            variant="outlined"
-            color="secondary"
-            fullWidth
-            onClick={handleContinueWithoutVerify}
-          // mt={2}
-          >
-            Continue without verification
-          </Button>
-        </>
-      ) : (
-        <Typography variant="body1" align="center" mt={2}>
-          Email verified successfully!
-        </Typography>
-      )}
-      <Snackbar
-        open={isSnackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-        message={
-          isVerified
-            ? 'Email verified successfully!'
-            : 'Invalid verification code. Please try again.'
-        }
-      />
-    </Container>
+    // <div><VerifyEmailInput codeLength={6} /></div>
+    <Box>
+      <Typography>Verify your Email address</Typography>
+      <VerifyEmailInput codeLength={6} />
+    </Box>
   );
 };
 
-export default VerifyEmailPage;
+export default VerifyEmailPage

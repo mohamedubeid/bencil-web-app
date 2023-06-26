@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-export const SignUpDataSchema = Joi.object({
+const SignUpDataSchema = Joi.object({
   first_name: Joi.string().min(2).max(50).required().messages({
     'string.min': 'First name should be at least {#limit} characters',
     'string.max': 'First name should not exceed {#limit} characters',
@@ -68,3 +68,5 @@ export const SignUpDataSchema = Joi.object({
   }),
   news_letter: Joi.boolean().required(),
 });
+
+export default SignUpDataSchema;
