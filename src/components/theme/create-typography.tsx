@@ -6,12 +6,12 @@ export const createTypography = () => {
       fontWeight: 600,
     },
     h2: {
-      fontSize: 36,
+      fontSize: 26,
       fontWeight: 600,
       lineHeight: 1.5
     },
     h3: {
-      fontSize: 32,
+      fontSize: 20,
       fontWeight: 600,
       lineHeight: 1.5
     },

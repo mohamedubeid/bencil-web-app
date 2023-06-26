@@ -9,12 +9,12 @@ import Button from '@mui/material/Button';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { SignUpData, INITIAL_SIGN_UP_DATA } from '../../interfaces/auth.interface';
 import SignUpDataSchema from '../../schema/SignUp.schema';
-
+import { useNavigate } from 'react-router-dom';
 
 const SignUpForm: React.FC = () => {
   const [ signUpData, setSignUpData ] = useState<SignUpData>( INITIAL_SIGN_UP_DATA );
   const [ validationError, setValidationError ] = useState<{ [ key: string ]: string } | undefined>( undefined );
-
+  const navigate = useNavigate();
   const handleProfessionChange = (
     event: SelectChangeEvent<string[]>
   ) => {
@@ -64,6 +64,7 @@ const SignUpForm: React.FC = () => {
       if ( !error ) {
         setValidationError( undefined );
         setSignUpData( INITIAL_SIGN_UP_DATA );
+        navigate( '/verify-email' );
         return
       } else {
         const newErrors: { [ key: string ]: string } = {};
@@ -150,7 +151,7 @@ const SignUpForm: React.FC = () => {
         />}
         label="Get useful tips and updates via email"
       />
-      <Button variant='contained' size='large' type='submit' href='/verify-email'>Join Now</Button>
+      <Button variant='contained' size='large' type='submit'>Join Now</Button>
     </Stack>
   );
 };
