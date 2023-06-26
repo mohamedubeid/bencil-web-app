@@ -1,6 +1,6 @@
 import ImageSlider from '../../components/imageSlider/ImageSlider';
 import SignUpForm from '../../components/auth/SignUpForm';
-import SignUpPageStyle from './SignUpPage.module';
+import SignUpPageStyle from './AuthPages.module';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';

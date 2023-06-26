@@ -80,7 +80,7 @@ const SignUpForm: React.FC = () => {
     }
   };
   return (
-    <Stack component='form' mt='32px' direction='column' spacing='16px' onSubmit={handleSubmit}>
+    <Stack component='form' mt='24px' direction='column' spacing='12px' onSubmit={handleSubmit}>
       <Stack direction='row' spacing='8px'>
         <InputField
           placeholder='First Name'
@@ -150,7 +150,7 @@ const SignUpForm: React.FC = () => {
         />}
         label="Get useful tips and updates via email"
       />
-      <Button variant='contained' size='large' type='submit'>Join Now</Button>
+      <Button variant='contained' size='large' type='submit' href='/verify-email'>Join Now</Button>
     </Stack>
   );
 };

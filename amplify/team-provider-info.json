@@ -10,6 +10,11 @@
       "StackName": "amplify-bencilwebapp-dev-162152",
       "StackId": "arn:aws:cloudformation:us-east-1:554120661701:stack/amplify-bencilwebapp-dev-162152/196c2220-0ddb-11ee-a915-0abf70a9bcef",
       "AmplifyAppId": "d2xt8legoi25gc"
+    },
+    "categories": {
+      "auth": {
+        "bencilwebapp8a672d8c": {}
+      }
     }
   }
 }
