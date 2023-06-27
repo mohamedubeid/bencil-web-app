@@ -7,14 +7,14 @@ export const primary = {
 }
 
 export const secondary = {
-  main: "#E3E3E4",
-  dark: "#878484",
-  light: "#E3E3E4",
+  main: "#918e8e",
+  dark: "#6c6b6b",
+  light: "#d0d0d0",
 }
 
 export const success = {
   light: '#3FC79A',
-  main: '#10B981',
+  main: '#1e461e',
   dark: '#0B815A',
   contrastText: '#FFFFFF'
 };

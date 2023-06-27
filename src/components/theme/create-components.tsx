@@ -3,12 +3,13 @@ export const createComponents = () => {
     MuiButton: {
       styleOverrides: {
         root: {
-          fontWeight: 600
+          fontWeight: 600,
+          borderRadius: '5px'
         },
         sizeLarge: {
           fontWeight: '700',
           fontSize: '15px',
-          width: '100%'
+          width: '100%',
         },
         // sizeMedium: {
         //   fontSize: 14

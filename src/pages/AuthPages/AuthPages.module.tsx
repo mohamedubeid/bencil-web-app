@@ -12,7 +12,7 @@ const AuthPagesStyle = () => {
 
     },
     form_container: {
-      margin: '32px 32px 0px 32px',
+      margin: '32px 32px 0px 24px',
       flex: 1,
       maxWidth: '530px',
       minWidth: '300px,'
@@ -35,11 +35,56 @@ const AuthPagesStyle = () => {
       '& input': {
         textAlign: 'center',
         fontSize: '1.5rem',
-        zIndex: 1
+        zIndex: 1,
       },
       ' .MuiOutlinedInput-notchedOutline': {
         borderRadius: '25px',
         background: theme.palette.secondary.light,
+      }
+    },
+    verify_outer_container: {
+      padding: { padding: '32px 0 0 24px' },
+    },
+    verify_page_container: {
+      textAlign: 'center',
+      margin: 'auto',
+      padding: '40px',
+      maxWidth: '680px'
+    },
+    verify_action: {
+      marginTop: '40px',
+      paddingLeft: '20px',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'start',
+      gap: '8px'
+    },
+    verify_title: {
+      color: theme.palette.primary.main,
+      marginBottom: '64px',
+    },
+    verify_button: {
+      width: '90px',
+      padding: '8px'
+    },
+    continue_button: {
+      padding: '8px',
+      background: theme.palette.secondary.light,
+      color: '#000000bb',
+      '&:hover': {
+        background: theme.palette.secondary.light,
+      }
+    },
+    get_another_code: {
+      color: theme.palette.secondary.main,
+      fontSize: '20px',
+      fontWeight: 700,
+      padding: 0,
+      margin: 0,
+      marginLeft: '4px',
+      '&:active': {
+        color: theme.palette.secondary.dark,
+        textDecoration: 'underLine'
       }
     }
   };
