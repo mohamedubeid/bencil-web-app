@@ -1,71 +1,19 @@
-import { useRef, useState, ChangeEvent, KeyboardEvent } from 'react';
-import TextField from '@mui/material/TextField';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import AuthPagesStyle from './AuthPages.module';
 import SimpleAlertMessage from '../../components/ui/SimpleAlertMessage';
-interface VerificationCodeInputProps {
-  codeLength: number;
-}
-
-const VerifyEmailInput: React.FC<VerificationCodeInputProps> = ( {
-  codeLength,
-} ) => {
-  const classes = AuthPagesStyle();
-  const codeInputRefs = useRef<HTMLInputElement[]>( [] );
-
-  const handleCodeChange = ( index: number, event: ChangeEvent<HTMLInputElement> ) => {
-    const input = event.target;
-    const nextInput = codeInputRefs.current[ index + 1 ];
-
-    // Auto-advance to the next input
-    if ( input.value && nextInput ) {
-      nextInput.focus();
-    }
-  };
-
-  const handleCodeKeyDown = ( index: number, event: KeyboardEvent<HTMLInputElement> ) => {
-    const input = event.target as HTMLInputElement;
-    const previousInput = codeInputRefs.current[ index - 1 ];
-
-    // Move to the previous input if the current input is empty and Backspace key is pressed
-    if ( !input.value && previousInput && event.key === 'Backspace' ) {
-      previousInput.focus();
-    }
-  };
-
-  const renderCodeInputs = () => {
-    const codeInputs: JSX.Element[] = [];
-
-    for ( let i = 0; i < codeLength; i++ ) {
-      codeInputs.push(
-        <TextField
-          // type='number'
-          sx={classes.verify_input}
-          key={i}
-          inputRef={( ref: HTMLInputElement ) => ( codeInputRefs.current[ i ] = ref )}
-          inputProps={{
-            maxLength: 1,
-          }}
-          onChange={( e: ChangeEvent<HTMLInputElement> ) => handleCodeChange( i, e )}
-          onKeyDown={( e: KeyboardEvent<HTMLInputElement> ) => handleCodeKeyDown( i, e )}
-        />
-      );
-    }
-
-    return codeInputs;
-  };
-
-  return <div>{renderCodeInputs()}</div>;
-};
+import VerifyEmailInput from '../../components/auth/VerifyEmailInput';
 
 
 const VerifyEmailPage = () => {
   const [ openAlert, setOpenAlert ] = useState( false );
-  const email = 'test.test@gmail.com';
+  const location = useLocation();
+  const signUpData = location.state?.signUpData;
+  const email = signUpData.email;
   const classes = AuthPagesStyle();
   const handleCloseAlert = () => {
     setOpenAlert( false )

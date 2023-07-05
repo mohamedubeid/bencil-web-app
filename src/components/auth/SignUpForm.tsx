@@ -11,6 +11,10 @@ import { SignUpData, INITIAL_SIGN_UP_DATA } from '../../interfaces/auth.interfac
 import SignUpDataSchema from '../../schema/SignUp.schema';
 import { useNavigate } from 'react-router-dom';
 
+interface LocationState {
+  signUpData: SignUpData;
+}
+
 const SignUpForm: React.FC = () => {
   const [ signUpData, setSignUpData ] = useState<SignUpData>( INITIAL_SIGN_UP_DATA );
   const [ validationError, setValidationError ] = useState<{ [ key: string ]: string } | undefined>( undefined );
@@ -64,7 +68,7 @@ const SignUpForm: React.FC = () => {
       if ( !error ) {
         setValidationError( undefined );
         setSignUpData( INITIAL_SIGN_UP_DATA );
-        navigate( '/verify-email' );
+        navigate( '/verify-email', { state: { signUpData: { ...signUpData, username: `@${signUpData.username}` } } as LocationState } );
         return
       } else {
         const newErrors: { [ key: string ]: string } = {};

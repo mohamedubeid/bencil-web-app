@@ -29,19 +29,6 @@ const AuthPagesStyle = () => {
       paddingLeft: '4px',
       textDecoration: 'none',
     },
-    verify_input: {
-      width: '70px',
-      margin: 1,
-      '& input': {
-        textAlign: 'center',
-        fontSize: '1.5rem',
-        zIndex: 1,
-      },
-      ' .MuiOutlinedInput-notchedOutline': {
-        borderRadius: '25px',
-        background: theme.palette.secondary.light,
-      }
-    },
     verify_outer_container: {
       padding: { padding: '32px 0 0 24px' },
     },
