@@ -57,3 +57,9 @@ export interface ProfessionProps extends Omit<BaseInputFieldsProps, 'value' | 'o
   handleCheckboxChange: (event: React.ChangeEvent<HTMLInputElement>, profession: string) => void;
   value: string[];
 }
+
+export interface LocationState {
+  state: {
+    signUpData: SignUpData;
+  };
+}

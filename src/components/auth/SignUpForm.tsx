@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Checkbox from '@mui/material/Checkbox';
 import PasswordTextField from './PasswordTextField';
@@ -7,15 +7,15 @@ import InputField from './InputField';
 import ProfessionSelectField from './ProfessionSelectField';
 import Button from '@mui/material/Button';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { SignUpData, INITIAL_SIGN_UP_DATA } from '../../interfaces/auth.interface';
+import { SignUpData, INITIAL_SIGN_UP_DATA, LocationState } from '../../interfaces/auth.interface';
 import SignUpDataSchema from '../../schema/SignUp.schema';
 import { useNavigate } from 'react-router-dom';
 
-interface LocationState {
-  signUpData: SignUpData;
+interface SignUpFormProps {
+  formData: SignUpData | undefined;
 }
 
-const SignUpForm: React.FC = () => {
+const SignUpForm: React.FC<SignUpFormProps> = ( { formData } ) => {
   const [ signUpData, setSignUpData ] = useState<SignUpData>( INITIAL_SIGN_UP_DATA );
   const [ validationError, setValidationError ] = useState<{ [ key: string ]: string } | undefined>( undefined );
   const navigate = useNavigate();
@@ -68,7 +68,7 @@ const SignUpForm: React.FC = () => {
       if ( !error ) {
         setValidationError( undefined );
         setSignUpData( INITIAL_SIGN_UP_DATA );
-        navigate( '/verify-email', { state: { signUpData: { ...signUpData, username: `@${signUpData.username}` } } as LocationState } );
+        navigate( '/verify-email', { state: { signUpData: { ...signUpData, username: `@${signUpData.username}` } } } as LocationState );
         return
       } else {
         const newErrors: { [ key: string ]: string } = {};
@@ -84,6 +84,12 @@ const SignUpForm: React.FC = () => {
       console.log( error );
     }
   };
+
+  useEffect( () => {
+    if ( formData !== undefined ) {
+      setSignUpData( formData )
+    }
+  }, [ formData ] )
   return (
     <Stack component='form' mt='24px' direction='column' spacing='12px' onSubmit={handleSubmit}>
       <Stack direction='row' spacing='8px'>

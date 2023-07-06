@@ -1,6 +1,5 @@
 import { useRef, ChangeEvent, KeyboardEvent } from 'react';
 import TextField from '@mui/material/TextField';
-import { useTheme, Theme } from '@mui/material/styles';
 
 interface VerificationCodeInputProps {
   codeLength: number;
@@ -9,7 +8,6 @@ interface VerificationCodeInputProps {
 const VerifyEmailInput: React.FC<VerificationCodeInputProps> = ( {
   codeLength,
 } ) => {
-  const theme: Theme = useTheme();
   const codeInputRefs = useRef<HTMLInputElement[]>( [] );
 
   const handleCodeChange = ( index: number, event: ChangeEvent<HTMLInputElement> ) => {
@@ -48,7 +46,6 @@ const VerifyEmailInput: React.FC<VerificationCodeInputProps> = ( {
             },
             ' .MuiOutlinedInput-notchedOutline': {
               borderRadius: '25px',
-              background: theme.palette.secondary.light,
             }
           }}
           key={i}

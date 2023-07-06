@@ -20,7 +20,7 @@ const ProfessionSelectField: React.FC<ProfessionProps> = ( {
   helperText,
   error
 } ) => {
-
+  console.log( '****************************' )
   return (
     <FormControl fullWidth size='small' error={error} >
       {value.length === 0 && (
