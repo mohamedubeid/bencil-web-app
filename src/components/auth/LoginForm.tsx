@@ -45,7 +45,7 @@ const LoginForm = () => {
   };
 
   return (
-    <Stack component='form' mt='24px' direction='column' spacing='32px' onSubmit={handleSubmit}>
+    <Stack component='form' mt='24px' direction='column' spacing='32px' onSubmit={handleSubmit} width='100%'>
       <InputField
         placeholder='Email'
         name='email'

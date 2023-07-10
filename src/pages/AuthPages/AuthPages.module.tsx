@@ -12,12 +12,13 @@ const AuthPagesStyle = () => {
 
     },
     form_container: {
-      margin: '32px 32px 0px 24px',
+      height: '100vh',
+      padding: { xs: '40px', md: '56px' },
       flex: 1,
       maxWidth: '530px',
-      minWidth: '300px,'
     },
     image_slider_container: {
+      height: '100vh',
       flex: 1,
       display: { xs: 'none', md: 'block' }
     },
