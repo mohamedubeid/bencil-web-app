@@ -71,7 +71,7 @@ const LoginForm = () => {
           />}
           label="Remember me"
         />
-        <Link to='/forget-password'>Forget Password?</Link>
+        <Link to='/auth/forget-password'>Forget Password?</Link>
       </Stack>
       <Button variant='contained' size='large' type='submit' >Let's Go</Button>
     </Stack >

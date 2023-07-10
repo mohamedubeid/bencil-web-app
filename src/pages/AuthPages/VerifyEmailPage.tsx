@@ -97,13 +97,13 @@ const VerifyEmailPage = () => {
   }
 
   const handleWrongEmail = () => {
-    navigate( '/signup', { state: { signUpData: { ...signUpData, username: signUpData?.username.substring( 1 ) } } } as LocationState );
+    navigate( '/auth/signup', { state: { signUpData: { ...signUpData, username: signUpData?.username.substring( 1 ) } } } as LocationState );
     localStorage.removeItem( 'bencil-last-sent-time-stamp' )
   }
 
   useEffect( () => { //to prevent user go to this page unless he fill the signup form
     if ( signUpData === undefined ) {
-      navigate( '/signup', { replace: true } )
+      navigate( '/auth/signup', { replace: true } )
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] )

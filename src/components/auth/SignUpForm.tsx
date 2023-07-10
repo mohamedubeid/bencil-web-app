@@ -68,7 +68,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ( { formData } ) => {
       if ( !error ) {
         setValidationError( undefined );
         setSignUpData( INITIAL_SIGN_UP_DATA );
-        navigate( '/verify-email', { state: { signUpData: { ...signUpData, username: `@${signUpData.username}` } } } as LocationState );
+        navigate( '/auth/verify-email', { state: { signUpData: { ...signUpData, username: `@${signUpData.username}` } } } as LocationState );
         return
       } else {
         const newErrors: { [ key: string ]: string } = {};
