@@ -11,19 +11,11 @@ const AuthPagesStyle = () => {
       paddingLeft: '4px',
       textDecoration: 'none',
     },
-    verify_outer_container: {
-      padding: { padding: '32px 0 0 24px' },
-    },
     verify_page_container: {
       textAlign: 'center',
-      margin: 'auto',
-      padding: '40px',
-      maxWidth: '680px'
     },
     verify_action: {
       marginTop: '40px',
-      paddingLeft: '20px',
-      flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'start',
       gap: '8px'
@@ -32,12 +24,7 @@ const AuthPagesStyle = () => {
       color: theme.palette.primary.main,
       marginBottom: '64px',
     },
-    verify_button: {
-      width: '90px',
-      padding: '8px'
-    },
     continue_button: {
-      padding: '8px',
       background: theme.palette.secondary.light,
       color: '#000000bb',
       '&:hover': {
@@ -55,6 +42,18 @@ const AuthPagesStyle = () => {
         color: theme.palette.secondary.dark,
         textDecoration: 'underLine'
       }
+    },
+    activated_stepper: {
+      width: { xs: '60px', sm: '80px' },
+      height: '4px',
+      borderRadius: '30px',
+      backgroundColor: theme.palette.primary.main,
+    },
+    disabled_stepper: {
+      width: { xs: '50px', sm: '80px' },
+      height: '4px',
+      borderRadius: '30px',
+      backgroundColor: theme.palette.secondary.main,
     }
   };
 };

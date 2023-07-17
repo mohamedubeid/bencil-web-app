@@ -17,8 +17,8 @@ const App = () => {
         <Route path='/auth/login' element={<LoginPage />} />
         <Route path='/auth/signup' element={<SignUpPage />} />
         <Route path='/auth/forget-password' element={<ForgetPasswordPage />} />
+        <Route path='/auth/verify-email' element={<VerifyEmailPage />} />
       </Route>
-      <Route path='/auth/verify-email' element={<VerifyEmailPage />} />
       {/* if the user loged in the the button will be go to the home page and if not then the message will be go to the login page */}
       <Route path="*" element={<NotFound />} />
 

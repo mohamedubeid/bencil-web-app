@@ -36,6 +36,16 @@ export const INITIAL_LOG_IN_DATA: LogInData = {
   remember_me: false,
 };
 
+export interface ResetPasswordData {
+  password: string;
+  confirm_password: string;
+}
+
+export const INITIAL_RESET_PASSWORD_DATA: ResetPasswordData = {
+  password: '',
+  confirm_password: '',
+};
+
 interface BaseInputFieldsProps {
   placeholder: string;
   name: string;

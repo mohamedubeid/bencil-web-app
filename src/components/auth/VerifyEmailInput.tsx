@@ -37,8 +37,8 @@ const VerifyEmailInput: React.FC<VerificationCodeInputProps> = ( {
       codeInputs.push(
         <TextField
           sx={{
-            width: '70px',
-            margin: 1,
+            width: '65px',
+            margin: 0.8,
             '& input': {
               textAlign: 'center',
               fontSize: '1.5rem',

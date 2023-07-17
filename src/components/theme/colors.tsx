@@ -3,13 +3,13 @@ export const primary = {
   dark: '#053E8C',
   main: '#0A66C2',
   light: "#0A66C2dd",
-  // light: '#0F8DDD'
 }
 
 export const secondary = {
   main: "#918e8e",
   dark: "#6c6b6b",
   light: "#d0d0d0",
+  contrastText: '#000'
 }
 
 export const success = {
