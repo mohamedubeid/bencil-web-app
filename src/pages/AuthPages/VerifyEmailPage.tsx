@@ -9,6 +9,7 @@ import VerifyEmailInput from '../../components/auth/VerifyEmailInput';
 import { SignUpData, LocationState } from '../../interfaces/auth.interface';
 import { handleSendingCode } from './AuthUtils';
 const VerifyEmailPage = () => {
+  const [ verificationCode, setVerificationCode ] = useState<string>( '' );
   const [ anotherCodeAlrt, setAnotherCodeAlrt ] = useState<Omit<SimpleAlertMessageProps, 'handleClose' | 'duration'>>( {
     open: false,
     severity: 'success',
@@ -36,6 +37,10 @@ const VerifyEmailPage = () => {
       open: false,
     } ) );
   }
+
+  const handleVerificationCodeChange = ( code: string ) => {
+    setVerificationCode( code );
+  };
 
   const handleVerify = () => {
     const isVerify = true;
@@ -80,7 +85,7 @@ const VerifyEmailPage = () => {
         <Typography component='span' variant='h2' >.</Typography>
         <Typography color='secondary.dark' variant='h3' component='span' fontWeight='bold' onClick={handleWrongEmail} sx={{ cursor: 'pointer' }}>Wrong email?</Typography>
       </Typography>
-      <VerifyEmailInput codeLength={4} />
+      <VerifyEmailInput codeLength={4} onCodeChange={handleVerificationCodeChange} />
       <SimpleAlertMessage message={verifyAlert.message} severity={verifyAlert.severity} handleClose={handleCloseVerifyAlert} open={verifyAlert.open} />
       <Stack sx={classes.verify_action} direction='column' >
         <Button variant='contained' size='large' onClick={handleVerify} fullWidth>Verify</Button>

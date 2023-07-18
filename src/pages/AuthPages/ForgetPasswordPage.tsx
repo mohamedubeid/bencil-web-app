@@ -8,6 +8,7 @@ import InputField from "../../components/auth/InputField";
 import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
+import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
 import { EmailValidation, ResetPasswordSchema } from "../../schema/Auth.schema";
 import VerifyEmailInput from '../../components/auth/VerifyEmailInput';
 import SimpleAlertMessage, { SimpleAlertMessageProps } from '../../components/ui/SimpleAlertMessage';
@@ -18,9 +19,9 @@ import { ResetPasswordData, INITIAL_RESET_PASSWORD_DATA } from "../../interfaces
 
 
 const ForgetPasswordPage: React.FC = () => {
-  const [ email, setEmail ] = useState<string>( 'test@gmail.com' );
+  const [ email, setEmail ] = useState<string>( '' );
   const [ emailValidationError, setEmailValidationError ] = useState<string | undefined>( undefined );
-  const [ step, setStep ] = useState<1 | 2 | 3 | 4>( 3 );
+  const [ step, setStep ] = useState<1 | 2 | 3 | 4>( 1 );
   const [ verifyAlert, setVerifyAlert ] = useState<Omit<SimpleAlertMessageProps, 'handleClose' | 'duration'>>( {
     open: false,
     severity: 'success',
@@ -33,14 +34,15 @@ const ForgetPasswordPage: React.FC = () => {
   } );
   const [ newPassword, setNewPassword ] = useState<ResetPasswordData>( INITIAL_RESET_PASSWORD_DATA );
   const [ passwordValidationError, setPasswordValidationError ] = useState<{ [ key: string ]: string } | undefined>( undefined );
-
-
+  const [ verificationCode, setVerificationCode ] = useState<string>( '' );
+  console.log( verificationCode, 'verificationCodeverificationCode' )
   const classes = AuthPagesStyle();
   //page 1
   const handleEmailChange = ( e: React.ChangeEvent<HTMLInputElement> ) => {
     const value: string = e.target.value;
     setEmail( value );
   };
+  console.log( '******************' )
   const handleResetPassword = () => {
     try {
       const { error } = EmailValidation.validate( email );
@@ -65,7 +67,9 @@ const ForgetPasswordPage: React.FC = () => {
     } ) );
   }
   //page 2
-
+  const handleVerificationCodeChange = ( code: string ) => {
+    setVerificationCode( code );
+  };
   const handleContinue = () => {
     const isVerify = true;
     if ( isVerify ) {
@@ -159,7 +163,7 @@ const ForgetPasswordPage: React.FC = () => {
           <Typography><FingerprintIcon fontSize="large" /></Typography>
           <Typography variant="h1">  Password Reset</Typography >
           <Typography variant="subtitle1" color='secondary.dark'>We sent a code to <span style={{ fontWeight: 'bold' }}>{email}</span></Typography>
-          <VerifyEmailInput codeLength={4} />
+          <VerifyEmailInput codeLength={4} onCodeChange={handleVerificationCodeChange} />
           <SimpleAlertMessage message={verifyAlert.message} severity={verifyAlert.severity} handleClose={handleCloseVerifyAlert} open={verifyAlert.open} />
           <Button variant='contained' size='large' type='submit' onClick={handleContinue} >Continue</Button>
           <Typography variant="subtitle1" color='secondary.main'>Don't receive the email? <Typography color='primary.main' display='inline' sx={{ cursor: 'pointer' }} onClick={handleResend} >Click to resend</Typography></Typography>
@@ -193,6 +197,19 @@ const ForgetPasswordPage: React.FC = () => {
             helperText={passwordValidationError?.confirm_password || ''}
           />
           <Button variant='contained' size='large' type='submit' onClick={handleSubmitNewPassword} >Reset Password</Button>
+          <Link to='/auth/login'>
+            <Stack direction='row' justifyContent='center' spacing={0.5} sx={{ color: 'secondary.dark' }} mb={2} >
+              <ArrowBackIcon />
+              <Typography > Back to Login</Typography>
+            </Stack>
+          </Link>
+        </Stack >}
+      {step === 4 &&
+        < Stack textAlign='center' mt={10} spacing={{ xs: 2, sm: 3 }}>
+          <Typography><VerifiedOutlinedIcon fontSize="large" /></Typography>
+          <Typography variant="h1">  All done!</Typography >
+          <Typography variant="subtitle1" color='secondary.dark'>Your password has been reset successfully. Please login using your new password.</Typography>
+          <Link to='/auth/login'> <Button variant='contained' size='large' type='submit' onClick={handleSubmitNewPassword} >Done</Button></Link>
           <Link to='/auth/login'>
             <Stack direction='row' justifyContent='center' spacing={0.5} sx={{ color: 'secondary.dark' }} mb={2} >
               <ArrowBackIcon />

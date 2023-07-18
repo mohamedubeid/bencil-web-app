@@ -3,10 +3,12 @@ import TextField from '@mui/material/TextField';
 
 interface VerificationCodeInputProps {
   codeLength: number;
+  onCodeChange: ( code: string ) => void;
 }
 
 const VerifyEmailInput: React.FC<VerificationCodeInputProps> = ( {
   codeLength,
+  onCodeChange,
 } ) => {
   const codeInputRefs = useRef<HTMLInputElement[]>( [] );
 
@@ -18,6 +20,10 @@ const VerifyEmailInput: React.FC<VerificationCodeInputProps> = ( {
     if ( input.value && nextInput ) {
       nextInput.focus();
     }
+    onCodeChange( getVerificationCode() );
+  };
+  const getVerificationCode = () => {
+    return codeInputRefs.current.map( ( ref ) => ref.value ).join( '' );
   };
 
   const handleCodeKeyDown = ( index: number, event: KeyboardEvent<HTMLInputElement> ) => {
