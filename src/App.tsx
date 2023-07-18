@@ -3,7 +3,7 @@ import SignUpPage from "./pages/AuthPages/SignUpPage";
 import LoginPage from './pages/AuthPages/LoginPage';
 import HomePage from './pages/homePage/HomePage';
 import VerifyEmailPage from './pages/AuthPages/VerifyEmailPage';
-import ForgetPasswordPage from './pages/AuthPages/ForgetPasswordPage';
+import ForgotPasswordPage from './pages/AuthPages/ForgotPasswordPage';
 import AuthLayout from './components/auth/AuthLayout';
 import NotFound from './pages/NotFound/NotFound';
 
@@ -16,7 +16,7 @@ const App = () => {
         <Route path='/auth' element={<Navigate to={'/auth/login'} />} />
         <Route path='/auth/login' element={<LoginPage />} />
         <Route path='/auth/signup' element={<SignUpPage />} />
-        <Route path='/auth/forget-password' element={<ForgetPasswordPage />} />
+        <Route path='/auth/forgot-password' element={<ForgotPasswordPage />} />
         <Route path='/auth/verify-email' element={<VerifyEmailPage />} />
       </Route>
       {/* if the user loged in the the button will be go to the home page and if not then the message will be go to the login page */}

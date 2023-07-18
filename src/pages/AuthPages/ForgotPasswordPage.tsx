@@ -19,7 +19,7 @@ import { RefPasswordTextField } from "../../components/ui/PasswordTextField";
 import { VERIFY_EMAIL_CODE_LENGTH } from "../../components/config/variables";
 
 
-const ForgetPasswordPage: React.FC = () => {
+const ForgotPasswordPage: React.FC = () => {
   const emailInputRef = useRef<HTMLInputElement>( null );
   const enteredEmail = emailInputRef.current?.value;
   const passwordInputRef = useRef<HTMLInputElement>( null );
@@ -148,7 +148,7 @@ const ForgetPasswordPage: React.FC = () => {
       {step === 1 &&
         < Stack textAlign='center' mt={10} spacing={4}>
           <Typography><FingerprintIcon fontSize="large" /></Typography>
-          <Typography variant="h1">  Forget Password ?</Typography >
+          <Typography variant="h1">  Forgot Password ?</Typography >
           <Typography variant="subtitle1" color='secondary.dark'>Not to worry, we got you! Let's get you a new password.</Typography>
           <RefInputField
             placeholder='Please enter your registered email.'
@@ -230,4 +230,4 @@ const ForgetPasswordPage: React.FC = () => {
   )
 }
 
-export default ForgetPasswordPage
+export default ForgotPasswordPage
