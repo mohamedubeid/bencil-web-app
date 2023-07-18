@@ -8,6 +8,8 @@ import SimpleAlertMessage, { SimpleAlertMessageProps } from '../../components/ui
 import VerifyEmailInput from '../../components/auth/VerifyEmailInput';
 import { SignUpData, LocationState } from '../../interfaces/auth.interface';
 import { handleSendingCode } from './AuthUtils';
+import { VERIFY_EMAIL_CODE_LENGTH } from "../../components/config/variables";
+
 const VerifyEmailPage = () => {
   const [ verificationCode, setVerificationCode ] = useState<string>( '' );
   const [ anotherCodeAlrt, setAnotherCodeAlrt ] = useState<Omit<SimpleAlertMessageProps, 'handleClose' | 'duration'>>( {
@@ -43,6 +45,16 @@ const VerifyEmailPage = () => {
   };
 
   const handleVerify = () => {
+    console.log( typeof verificationCode, 'verificationCodeverificationCode' )
+    if ( verificationCode.length < VERIFY_EMAIL_CODE_LENGTH ) {
+      setVerifyAlert( ( prevState ) => ( {
+        ...prevState,
+        open: true,
+        severity: 'warning',
+        message: 'You need to write the code first before continue'
+      } ) );
+      return;
+    }
     const isVerify = true;
     if ( isVerify ) {
       setVerifyAlert( ( prevState ) => ( {
@@ -85,7 +97,7 @@ const VerifyEmailPage = () => {
         <Typography component='span' variant='h2' >.</Typography>
         <Typography color='secondary.dark' variant='h3' component='span' fontWeight='bold' onClick={handleWrongEmail} sx={{ cursor: 'pointer' }}>Wrong email?</Typography>
       </Typography>
-      <VerifyEmailInput codeLength={4} onCodeChange={handleVerificationCodeChange} />
+      <VerifyEmailInput onCodeChange={handleVerificationCodeChange} />
       <SimpleAlertMessage message={verifyAlert.message} severity={verifyAlert.severity} handleClose={handleCloseVerifyAlert} open={verifyAlert.open} />
       <Stack sx={classes.verify_action} direction='column' >
         <Button variant='contained' size='large' onClick={handleVerify} fullWidth>Verify</Button>

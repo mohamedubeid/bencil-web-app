@@ -41,10 +41,13 @@ export interface ResetPasswordData {
   confirm_password: string;
 }
 
-export const INITIAL_RESET_PASSWORD_DATA: ResetPasswordData = {
-  password: '',
-  confirm_password: '',
-};
+export interface RefInputFieldProps {
+  type?: string;
+  inputRef: React.RefObject<HTMLInputElement>;
+  placeholder: string;
+  error?: boolean | undefined;
+  helperText?: React.ReactNode;
+}
 
 interface BaseInputFieldsProps {
   placeholder: string;

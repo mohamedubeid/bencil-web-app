@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import InputField from "../../components/auth/InputField";
+import { RefInputField } from "../../components/ui/InputField";
 import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
@@ -14,12 +14,16 @@ import VerifyEmailInput from '../../components/auth/VerifyEmailInput';
 import SimpleAlertMessage, { SimpleAlertMessageProps } from '../../components/ui/SimpleAlertMessage';
 import { handleSendingCode } from "./AuthUtils";
 import AuthPagesStyle from "./AuthPages.module";
-import { ResetPasswordData, INITIAL_RESET_PASSWORD_DATA } from "../../interfaces/auth.interface";
-
+import { ResetPasswordData } from "../../interfaces/auth.interface";
+import { RefPasswordTextField } from "../../components/ui/PasswordTextField";
+import { VERIFY_EMAIL_CODE_LENGTH } from "../../components/config/variables";
 
 
 const ForgetPasswordPage: React.FC = () => {
-  const [ email, setEmail ] = useState<string>( '' );
+  const emailInputRef = useRef<HTMLInputElement>( null );
+  const enteredEmail = emailInputRef.current?.value;
+  const passwordInputRef = useRef<HTMLInputElement>( null );
+  const confirmPasswordInputRef = useRef<HTMLInputElement>( null );
   const [ emailValidationError, setEmailValidationError ] = useState<string | undefined>( undefined );
   const [ step, setStep ] = useState<1 | 2 | 3 | 4>( 1 );
   const [ verifyAlert, setVerifyAlert ] = useState<Omit<SimpleAlertMessageProps, 'handleClose' | 'duration'>>( {
@@ -32,20 +36,16 @@ const ForgetPasswordPage: React.FC = () => {
     severity: 'success',
     message: 'Verified',
   } );
-  const [ newPassword, setNewPassword ] = useState<ResetPasswordData>( INITIAL_RESET_PASSWORD_DATA );
   const [ passwordValidationError, setPasswordValidationError ] = useState<{ [ key: string ]: string } | undefined>( undefined );
   const [ verificationCode, setVerificationCode ] = useState<string>( '' );
-  console.log( verificationCode, 'verificationCodeverificationCode' )
   const classes = AuthPagesStyle();
-  //page 1
-  const handleEmailChange = ( e: React.ChangeEvent<HTMLInputElement> ) => {
-    const value: string = e.target.value;
-    setEmail( value );
-  };
   console.log( '******************' )
+  //page 1
   const handleResetPassword = () => {
+    const enteredEmail = emailInputRef.current?.value;
+    console.log( enteredEmail, 'enteredEmail' )
     try {
-      const { error } = EmailValidation.validate( email );
+      const { error } = EmailValidation.validate( enteredEmail );
       if ( !error ) {
         setEmailValidationError( undefined );
         setStep( 2 );
@@ -71,6 +71,16 @@ const ForgetPasswordPage: React.FC = () => {
     setVerificationCode( code );
   };
   const handleContinue = () => {
+    console.log( verificationCode, 'verificationCodeverificationCode' )
+    if ( verificationCode.length < VERIFY_EMAIL_CODE_LENGTH ) {
+      setVerifyAlert( ( prevState ) => ( {
+        ...prevState,
+        open: true,
+        severity: 'warning',
+        message: 'You need to write the code first before continue'
+      } ) );
+      return;
+    }
     const isVerify = true;
     if ( isVerify ) {
       setVerifyAlert( ( prevState ) => ( {
@@ -81,6 +91,7 @@ const ForgetPasswordPage: React.FC = () => {
       } ) );
       localStorage.removeItem( 'bencil-last-sent-time-stamp' )
       setStep( 3 );
+      return;
     } else {
       setVerifyAlert( ( prevState ) => ( {
         ...prevState,
@@ -88,6 +99,7 @@ const ForgetPasswordPage: React.FC = () => {
         severity: 'error',
         message: 'Error Code'
       } ) );
+      return;
     }
   };
   const handleResend = () => {
@@ -102,15 +114,11 @@ const ForgetPasswordPage: React.FC = () => {
   };
 
   //page 3
-  const handleChangePassword = ( e: React.ChangeEvent<HTMLInputElement> ) => {
-    const { name, value } = e.target;
-    setNewPassword( ( prevData ) => ( {
-      ...prevData,
-      [ name ]: value,
-    } ) )
-  }
-
   const handleSubmitNewPassword = () => {
+    const enteredPassword = passwordInputRef.current?.value;
+    const enteredConfirmPassword = confirmPasswordInputRef.current?.value;
+    const newPassword = { password: enteredPassword, confirm_password: enteredConfirmPassword }
+    console.log( newPassword, 'newPasswordnewPassword' )
     try {
       const { error } = ResetPasswordSchema.validate( newPassword, {
         abortEarly: false,
@@ -142,11 +150,9 @@ const ForgetPasswordPage: React.FC = () => {
           <Typography><FingerprintIcon fontSize="large" /></Typography>
           <Typography variant="h1">  Forget Password ?</Typography >
           <Typography variant="subtitle1" color='secondary.dark'>Not to worry, we got you! Let's get you a new password.</Typography>
-          <InputField
+          <RefInputField
             placeholder='Please enter your registered email.'
-            name='email'
-            value={email}
-            onChange={handleEmailChange}
+            inputRef={emailInputRef}
             error={!!emailValidationError} //check if the email form correct then make sure that the email is exist in out database
             helperText={emailValidationError || ''}
           />
@@ -162,8 +168,8 @@ const ForgetPasswordPage: React.FC = () => {
         < Stack textAlign='center' mt={10} spacing={{ xs: 2, sm: 3 }}>
           <Typography><FingerprintIcon fontSize="large" /></Typography>
           <Typography variant="h1">  Password Reset</Typography >
-          <Typography variant="subtitle1" color='secondary.dark'>We sent a code to <span style={{ fontWeight: 'bold' }}>{email}</span></Typography>
-          <VerifyEmailInput codeLength={4} onCodeChange={handleVerificationCodeChange} />
+          <Typography variant="subtitle1" color='secondary.dark'>We sent a code to <span style={{ fontWeight: 'bold' }}>{enteredEmail}</span></Typography>
+          <VerifyEmailInput onCodeChange={handleVerificationCodeChange} />
           <SimpleAlertMessage message={verifyAlert.message} severity={verifyAlert.severity} handleClose={handleCloseVerifyAlert} open={verifyAlert.open} />
           <Button variant='contained' size='large' type='submit' onClick={handleContinue} >Continue</Button>
           <Typography variant="subtitle1" color='secondary.main'>Don't receive the email? <Typography color='primary.main' display='inline' sx={{ cursor: 'pointer' }} onClick={handleResend} >Click to resend</Typography></Typography>
@@ -180,19 +186,15 @@ const ForgetPasswordPage: React.FC = () => {
           <Typography><PendingOutlinedIcon fontSize="large" /></Typography>
           <Typography variant="h1">  Set new password</Typography >
           <Typography variant="subtitle1" color='secondary.dark'>Must be at least 8 characters.</Typography>
-          <InputField
+          <RefPasswordTextField
             placeholder='Password'
-            name='password'
-            value={newPassword.password}
-            onChange={handleChangePassword}
+            inputRef={passwordInputRef}
             error={!!passwordValidationError?.password}
             helperText={passwordValidationError?.password || ''}
           />
-          <InputField
+          <RefPasswordTextField
             placeholder='Confirm Password'
-            name='confirm_password'
-            value={newPassword.confirm_password}
-            onChange={handleChangePassword}
+            inputRef={confirmPasswordInputRef}
             error={!!passwordValidationError?.confirm_password}
             helperText={passwordValidationError?.confirm_password || ''}
           />

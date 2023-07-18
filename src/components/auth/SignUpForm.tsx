@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Checkbox from '@mui/material/Checkbox';
-import PasswordTextField from './PasswordTextField';
+import { PasswordTextField } from '../ui/PasswordTextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import InputField from './InputField';
-import ProfessionSelectField from './ProfessionSelectField';
+import { InputField } from '../ui/InputField';
+import ProfessionSelectField from '../ui/ProfessionSelectField';
 import Button from '@mui/material/Button';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { SignUpData, INITIAL_SIGN_UP_DATA, LocationState } from '../../interfaces/auth.interface';
