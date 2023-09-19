@@ -6,6 +6,9 @@ import VerifyEmailPage from './pages/AuthPages/VerifyEmailPage';
 import ForgotPasswordPage from './pages/AuthPages/ForgotPasswordPage';
 import AuthLayout from './components/auth/AuthLayout';
 import NotFound from './pages/NotFound/NotFound';
+import { Amplify } from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
 
 const App = () => {
 

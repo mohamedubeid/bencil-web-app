@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "bencilwebapp8a672d8c_identitypool_8a672d8c",
+    "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "bencil8a672d8c",
-    "userPoolName": "bencilwebapp8a672d8c_userpool_8a672d8c",
+    "resourceNameTruncated": "bencil45e31fc0",
+    "userPoolName": "bencilwebapp",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -14,7 +14,7 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Your verification code",
+    "emailVerificationSubject": "Verification code for Bencil",
     "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
@@ -25,23 +25,23 @@
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
-    "userpoolClientWriteAttributes": [
-      "email"
-    ],
-    "userpoolClientReadAttributes": [
-      "email"
-    ],
-    "userpoolClientLambdaRole": "bencil8a672d8c_userpoolclient_lambda_role",
+    "userpoolClientWriteAttributes": [],
+    "userpoolClientReadAttributes": [],
+    "userpoolClientLambdaRole": "bencil45e31fc0_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "8a672d8c",
-    "resourceName": "bencilwebapp8a672d8c",
+    "sharedId": "45e31fc0",
+    "resourceName": "bencilwebapp",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "default",
+    "serviceName": "Cognito",
     "usernameAttributes": [
       "email"
     ],
+    "useDefault": "manual",
+    "userPoolGroups": false,
     "userPoolGroupList": [],
-    "serviceName": "Cognito",
+    "adminQueries": false,
+    "thirdPartyAuth": false,
+    "authProviders": [],
     "usernameCaseSensitive": false,
     "useEnabledMfas": true
   }

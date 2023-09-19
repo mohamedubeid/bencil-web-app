@@ -1,6 +1,6 @@
 {
   "auth": {
-    "bencilwebapp8a672d8c": {
+    "bencilwebapp": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
