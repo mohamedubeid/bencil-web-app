@@ -7,7 +7,7 @@ import { InputField } from '../ui/InputField';
 import ProfessionSelectField from '../ui/ProfessionSelectField';
 import Button from '@mui/material/Button';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { SignUpData, INITIAL_SIGN_UP_DATA, LocationState } from '../../interfaces/auth.interface';
+import { SignUpData, INITIAL_SIGN_UP_DATA, LocationState } from '../../interfaces/Auth.interface';
 import SignUpDataSchema from '../../schema/SignUp.schema';
 import { useNavigate } from 'react-router-dom';
 

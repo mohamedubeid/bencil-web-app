@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Button, Checkbox, FormControlLabel, Stack } from '@mui/material'
 import { InputField } from '../ui/InputField'
 import { PasswordTextField } from '../ui/PasswordTextField'
-import { INITIAL_LOG_IN_DATA, LogInData, } from '../../interfaces/auth.interface';
+import { INITIAL_LOG_IN_DATA, LogInData, } from '../../interfaces/Auth.interface';
 import LoginDataSchema from '../../schema/LogIn.schema';
 import { Link } from 'react-router-dom';
 

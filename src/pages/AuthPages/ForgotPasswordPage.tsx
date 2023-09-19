@@ -14,7 +14,7 @@ import VerifyEmailInput from '../../components/auth/VerifyEmailInput';
 import SimpleAlertMessage, { SimpleAlertMessageProps } from '../../components/ui/SimpleAlertMessage';
 import { handleSendingCode } from "./AuthUtils";
 import AuthPagesStyle from "./AuthPages.module";
-import { ResetPasswordData } from "../../interfaces/auth.interface";
+import { ResetPasswordData } from "../../interfaces/Auth.interface";
 import { RefPasswordTextField } from "../../components/ui/PasswordTextField";
 import { VERIFY_EMAIL_CODE_LENGTH } from "../../components/config/variables";
 

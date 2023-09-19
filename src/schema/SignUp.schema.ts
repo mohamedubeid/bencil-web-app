@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import {EmailValidation, PasswordValidation, ConfirmPasswordValidation} from './Auth.schema';
-import {SignUpData} from '../interfaces/auth.interface';
+import {SignUpData} from '../interfaces/Auth.interface';
 
 const SignUpDataSchema: Joi.ObjectSchema<SignUpData> = Joi.object({
   first_name: Joi.string().min(2).max(50).required().messages({

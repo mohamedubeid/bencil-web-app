@@ -1,6 +1,6 @@
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import { InputFieldProps, RefInputFieldProps } from '../../interfaces/auth.interface';
+import { InputFieldProps, RefInputFieldProps } from '../../interfaces/Auth.interface';
 
 export const InputField: React.FC<InputFieldProps> = ( {
   type,

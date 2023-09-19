@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { PasswordTextFieldProps, RefInputFieldProps } from '../../interfaces/auth.interface';
+import { PasswordTextFieldProps, RefInputFieldProps } from '../../interfaces/Auth.interface';
 
 export const PasswordTextField: React.FC<PasswordTextFieldProps> = ( {
   placeholder,

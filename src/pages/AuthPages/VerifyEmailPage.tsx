@@ -6,7 +6,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import AuthPagesStyle from './AuthPages.module';
 import SimpleAlertMessage, { SimpleAlertMessageProps } from '../../components/ui/SimpleAlertMessage';
 import VerifyEmailInput from '../../components/auth/VerifyEmailInput';
-import { SignUpData, LocationState } from '../../interfaces/auth.interface';
+import { SignUpData, LocationState } from '../../interfaces/Auth.interface';
 import { handleSendingCode } from './AuthUtils';
 import { VERIFY_EMAIL_CODE_LENGTH } from "../../components/config/variables";
 
