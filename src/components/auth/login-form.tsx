@@ -1,13 +1,20 @@
-import { useState } from 'react'
-import { Button, Checkbox, FormControlLabel, Stack } from '@mui/material'
-import { InputField } from '../ui/InputField'
-import { PasswordTextField } from '../ui/PasswordTextField'
-import { INITIAL_LOG_IN_DATA, LogInData, } from '../../interfaces/Auth.interface';
+import React, { useState } from 'react'
+import { Button, Checkbox, FormControlLabel, Stack} from '@mui/material'
+import { InputField } from '../ui/inputs'
+import { PasswordTextField } from '../ui/inputs'
+import { INITIAL_LOG_IN_DATA, LogInData, } from './interfaces';
 import LoginDataSchema from '../../schema/LogIn.schema';
-import { Link } from 'react-router-dom';
+import { Link } from '@mui/material';
+import { RouterLink } from '../../routes/components';
+import { useRouter } from '../../routes/hooks';
+import { paths } from '../../routes/paths';
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
+
+  const router = useRouter();
+
   const [ logInData, setLogInData ] = useState<LogInData>( INITIAL_LOG_IN_DATA );
+
   const [ validationError, setValidationError ] = useState<{ [ key: string ]: string } | undefined>( undefined );
 
   const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
@@ -20,7 +27,6 @@ const LoginForm = () => {
 
   const handleSubmit = ( event: React.FormEvent<HTMLFormElement> ) => {
     event.preventDefault();
-    console.log( logInData );
     try {
       const { error } = LoginDataSchema.validate( logInData, {
         abortEarly: false,
@@ -28,6 +34,7 @@ const LoginForm = () => {
       if ( !error ) {
         setValidationError( undefined );
         setLogInData( INITIAL_LOG_IN_DATA );
+        router.replace('/');
         return
       } else {
         const newErrors: { [ key: string ]: string } = {};
@@ -71,11 +78,11 @@ const LoginForm = () => {
           />}
           label="Remember me"
         />
-        <Link to='/auth/forgot-password'>Forgot Password?</Link>
+        <Link component={RouterLink} to={paths.auth.forgotPassword} >Forgot Password?</Link>
       </Stack>
       <Button variant='contained' size='large' type='submit' >Let's Go</Button>
     </Stack >
   )
 }
 
-export default LoginForm
+export default LoginForm;

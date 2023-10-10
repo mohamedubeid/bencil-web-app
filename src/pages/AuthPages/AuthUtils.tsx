@@ -1,5 +1,5 @@
-import { TIME_TO_SENT_ANOTHER_CODE } from '../../components/config/variables';
-import { SimpleAlertMessageProps } from '../../components/ui/SimpleAlertMessage';
+import { TIME_TO_SENT_ANOTHER_CODE } from '../../config/variables';
+import { SimpleAlertMessageProps } from '../../components/ui/interfaces';
 
 
 export const handleSendingCode = (

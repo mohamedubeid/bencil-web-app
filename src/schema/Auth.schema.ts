@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import {ResetPasswordData} from '../interfaces/Auth.interface';
+import {ResetPasswordData} from '../components/auth/interfaces';
 
 export const EmailValidation = Joi.string()
   .email({tlds: {allow: false}})

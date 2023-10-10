@@ -3,14 +3,7 @@ import { Stack, Typography } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import GppBadIcon from '@mui/icons-material/GppBad';
-
-export interface SimpleAlertMessageProps {
-  message: string;
-  duration?: number;
-  open: boolean;
-  severity?: 'success' | 'warning' | 'error';
-  handleClose: () => void;
-}
+import { SimpleAlertMessageProps } from './interfaces';
 
 const SimpleAlertMessage: React.FC<SimpleAlertMessageProps> = ( { message, duration = 5000, open, severity = 'success', handleClose } ) => {
   let color = 'success.dark';

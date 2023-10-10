@@ -1,6 +1,26 @@
 import {SelectChangeEvent} from '@mui/material/Select';
 
-export interface SignUpData {
+export interface AuthContextType {
+  user: any; // Replace 'User' with the actual type for user data
+  loading: boolean;
+  authenticated: boolean;
+  unauthenticated: boolean;
+  login: ({email, password, remember_me}: LogInData) => Promise<void>; // Specify the function signature with arguments
+  logout: () => Promise<void>;
+  register: (email: string, password: string) => Promise<void>;
+  newPassword: (email: string, code: string, password: string) => Promise<void>;
+  forgotPassword: (email: string) => Promise<void>;
+  confirmRegister: (email: string, code: string) => Promise<void>;
+  resendCodeRegister: (email: string) => Promise<void>;
+};
+
+export interface LogInData {
+  email: string;
+  password: string;
+  remember_me?: boolean;
+}
+
+export interface SingUpForm {
   first_name: string;
   last_name: string;
   email: string;
@@ -12,7 +32,9 @@ export interface SignUpData {
   news_letter: boolean;
 }
 
-export const INITIAL_SIGN_UP_DATA: SignUpData = {
+export type User = Omit<SingUpForm, 'password' | 'confirm_password'>;
+
+export const INITIAL_SIGN_UP_DATA: SingUpForm = {
   first_name: '',
   last_name: '',
   email: '',
@@ -24,11 +46,6 @@ export const INITIAL_SIGN_UP_DATA: SignUpData = {
   news_letter: false,
 };
 
-export interface LogInData {
-  email: string;
-  password: string;
-  remember_me: boolean;
-}
 
 export const INITIAL_LOG_IN_DATA: LogInData = {
   email: '',
@@ -73,6 +90,6 @@ export interface ProfessionProps extends Omit<BaseInputFieldsProps, 'value' | 'o
 
 export interface LocationState {
   state: {
-    signUpData: SignUpData;
+    data: SingUpForm | undefined;
   };
 }

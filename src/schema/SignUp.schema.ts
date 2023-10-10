@@ -1,8 +1,8 @@
 import Joi from 'joi';
 import {EmailValidation, PasswordValidation, ConfirmPasswordValidation} from './Auth.schema';
-import {SignUpData} from '../interfaces/Auth.interface';
+import { SingUpForm } from '../components/auth/interfaces';
 
-const SignUpDataSchema: Joi.ObjectSchema<SignUpData> = Joi.object({
+const SignUpDataSchema: Joi.ObjectSchema<SingUpForm> = Joi.object({
   first_name: Joi.string().min(2).max(50).required().messages({
     'string.min': 'First name should be at least {#limit} characters',
     'string.max': 'First name should not exceed {#limit} characters',

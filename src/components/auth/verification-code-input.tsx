@@ -1,12 +1,12 @@
 import { useRef, ChangeEvent, KeyboardEvent } from 'react';
 import TextField from '@mui/material/TextField';
-import { VERIFY_EMAIL_CODE_LENGTH } from '../config/variables';
+import { VERIFY_EMAIL_CODE_LENGTH } from '../../config/variables';
 
 interface VerificationCodeInputProps {
   onCodeChange: ( code: string ) => void;
 }
 
-const VerifyEmailInput: React.FC<VerificationCodeInputProps> = ( {
+const VerificationCodeInput: React.FC<VerificationCodeInputProps> = ( {
   onCodeChange,
 } ) => {
   const codeInputRefs = useRef<HTMLInputElement[]>( [] );
@@ -70,4 +70,4 @@ const VerifyEmailInput: React.FC<VerificationCodeInputProps> = ( {
   return <div>{renderCodeInputs()}</div>;
 };
 
-export default VerifyEmailInput;
+export default VerificationCodeInput;

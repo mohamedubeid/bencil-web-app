@@ -1,8 +1,8 @@
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import { InputFieldProps, RefInputFieldProps } from '../../interfaces/Auth.interface';
+import { InputFieldProps } from '../../auth/interfaces';
 
-export const InputField: React.FC<InputFieldProps> = ( {
+const InputField: React.FC<InputFieldProps> = ( {
   type,
   placeholder,
   startAdornment,
@@ -36,28 +36,4 @@ export const InputField: React.FC<InputFieldProps> = ( {
     />
   );
 };
-
-export const RefInputField: React.FC<RefInputFieldProps> = ( {
-  type,
-  inputRef,
-  placeholder,
-  helperText,
-  error
-} ) => {
-  return (
-    <TextField
-      fullWidth
-      size='small'
-      variant="outlined"
-      label={type === 'date' ? placeholder : ''}
-      InputLabelProps={{
-        shrink: true,
-      }}
-      inputRef={inputRef}
-      placeholder={type !== 'date' ? placeholder : ''}
-      type={type ? type : 'text'}
-      error={error}
-      helperText={helperText}
-    />
-  );
-};
+export default InputField;

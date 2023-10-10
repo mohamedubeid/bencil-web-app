@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Checkbox from '@mui/material/Checkbox';
 import FormHelperText from '@mui/material/FormHelperText';
-import { ProfessionProps } from '../../interfaces/Auth.interface';
+import { ProfessionProps } from '../../auth/interfaces';
 
 const professions: string[] = [ 'professions1', 'professions2', 'professions3', 'professions4', 'professions5', 'professions6', 'professions7', 'professions8', 'professions9', 'professions10', 'professions11' ]
 
@@ -20,7 +20,6 @@ const ProfessionSelectField: React.FC<ProfessionProps> = ( {
   helperText,
   error
 } ) => {
-  console.log( '****************************' )
   return (
     <FormControl fullWidth size='small' error={error} >
       {value.length === 0 && (

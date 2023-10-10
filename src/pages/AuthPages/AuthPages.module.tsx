@@ -33,6 +33,7 @@ const AuthPagesStyle = () => {
     },
     get_another_code: {
       color: theme.palette.secondary.main,
+      textDecoration: 'underLine',
       fontSize: '20px',
       fontWeight: 700,
       padding: 0,

@@ -1,24 +1,29 @@
 import { useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Checkbox from '@mui/material/Checkbox';
-import { PasswordTextField } from '../ui/PasswordTextField';
+import { PasswordTextField } from '../ui/inputs';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { InputField } from '../ui/InputField';
-import ProfessionSelectField from '../ui/ProfessionSelectField';
+import { InputField } from '../ui/inputs';
+import { ProfessionSelectField } from '../ui/inputs';
 import Button from '@mui/material/Button';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { SignUpData, INITIAL_SIGN_UP_DATA, LocationState } from '../../interfaces/Auth.interface';
+import { SingUpForm, INITIAL_SIGN_UP_DATA, LocationState } from './interfaces';
 import SignUpDataSchema from '../../schema/SignUp.schema';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from '../../routes/hooks';
 
 interface SignUpFormProps {
-  formData: SignUpData | undefined;
+  formData: SingUpForm | undefined;
 }
 
 const SignUpForm: React.FC<SignUpFormProps> = ( { formData } ) => {
-  const [ signUpData, setSignUpData ] = useState<SignUpData>( INITIAL_SIGN_UP_DATA );
+
+  const router = useRouter();
+
+  const [ signUpData, setSignUpData ] = useState<SingUpForm>( INITIAL_SIGN_UP_DATA );
+
   const [ validationError, setValidationError ] = useState<{ [ key: string ]: string } | undefined>( undefined );
-  const navigate = useNavigate();
+
+
   const handleProfessionChange = (
     event: SelectChangeEvent<string[]>
   ) => {
@@ -29,6 +34,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ( { formData } ) => {
       }
     } )
   };
+
   const handleCheckboxChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     profession: string
@@ -50,6 +56,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ( { formData } ) => {
       }
     } );
   };
+
   const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
     const { name, value } = event.target;
     setSignUpData( ( prevData ) => ( {
@@ -60,7 +67,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ( { formData } ) => {
 
   const handleSubmit = ( event: React.FormEvent<HTMLFormElement> ) => {
     event.preventDefault();
-    console.log( { ...signUpData, username: `@${signUpData.username}` } );
+    // console.log( { ...signUpData, username: `@${signUpData.username}` } );
     try {
       const { error } = SignUpDataSchema.validate( signUpData, {
         abortEarly: false,
@@ -68,17 +75,18 @@ const SignUpForm: React.FC<SignUpFormProps> = ( { formData } ) => {
       if ( !error ) {
         setValidationError( undefined );
         setSignUpData( INITIAL_SIGN_UP_DATA );
-        navigate( '/auth/verify-email', { state: { signUpData: { ...signUpData, username: `@${signUpData.username}` } } } as LocationState );
-        return
+        const data = {...signUpData, username: `@${signUpData.username}`} as SingUpForm
+        router.push('/auth/verify-email', {state: {data} } as LocationState);
+        return;
       } else {
         const newErrors: { [ key: string ]: string } = {};
         error.details.forEach( ( detail ) => {
-          const path = detail.path[ 0 ] as keyof SignUpData;
+          const path = detail.path[ 0 ] as keyof SingUpForm;
           const message = detail.message;
           newErrors[ path ] = message;
         } );
         setValidationError( newErrors );
-        return
+        return;
       }
     } catch ( error ) {
       console.log( error );
