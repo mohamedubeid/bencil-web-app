@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { Link } from '@mui/material';
 import { RouterLink } from '../../routes/components';
@@ -12,11 +11,6 @@ interface LogoProps {
 }
 
 const Logo = forwardRef<HTMLDivElement, LogoProps>(({ disabledLink = false, sx, ...other }, ref) => {
-  const theme = useTheme();
-
-  // const PRIMARY_LIGHT = theme.palette.primary.light;
-  // const PRIMARY_MAIN = theme.palette.primary.main;
-  // const PRIMARY_DARK = theme.palette.primary.dark;
 
   // New SVG code
   const logo = (
