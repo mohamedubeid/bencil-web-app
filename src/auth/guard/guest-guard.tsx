@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useCallback, useEffect } from 'react';
 // routes
 import { paths } from '../../routes/paths';

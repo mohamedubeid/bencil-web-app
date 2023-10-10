@@ -4,7 +4,6 @@ import { SplashScreen } from '../../components/loading-screen';
 import { AuthContext } from './auth-context';
 import { AuthContextType } from '../../components/auth/interfaces';
 
-// ----------------------------------------------------------------------
 
 interface AuthConsumerProps {
   children: React.ReactNode;

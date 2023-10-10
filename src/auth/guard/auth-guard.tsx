@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useEffect, useCallback, useState } from 'react';
 // routes
 import { paths } from '../../routes/paths';
@@ -6,11 +5,9 @@ import { useRouter } from '../../routes/hooks';
 //
 import { useAuthContext } from '../hooks';
 
-// ----------------------------------------------------------------------
 
 const loginPath = paths.auth.login;
 
-// ----------------------------------------------------------------------
 
 interface AuthGuardProps {
   children: React.ReactNode;

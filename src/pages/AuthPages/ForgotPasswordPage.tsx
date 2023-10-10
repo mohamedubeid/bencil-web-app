@@ -127,7 +127,6 @@ const ForgotPasswordPage: React.FC = () => {
         setStep( 4 );
         return;
       } else {
-        console.log( error, 'errorerror' )
         const newErrors: { [ key: string ]: string } = {};
         error.details.forEach( ( detail ) => {
           const path = detail.path[ 0 ] as keyof ResetPasswordData;

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useEffect, useReducer, useCallback, useMemo } from 'react';
 // import { Auth } from '@aws-amplify';
 import { Auth, Amplify } from 'aws-amplify';
@@ -43,7 +42,6 @@ const reducer = (state: State, action: Action) => {
   return state;
 };
 
-// ----------------------------------------------------------------------
 
 Amplify.configure(awsconfig);
 
@@ -147,7 +145,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     await Auth.forgotPasswordSubmit(email, code, password);
   }, []);
 
-  // ----------------------------------------------------------------------
 
   const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
 
@@ -185,6 +182,3 @@ export function AuthProvider({ children }: AuthProviderProps) {
   return <AuthContext.Provider value={memoizedValue}>{children}</AuthContext.Provider>;
 }
 
-AuthProvider.propTypes = {
-  children: PropTypes.node,
-};

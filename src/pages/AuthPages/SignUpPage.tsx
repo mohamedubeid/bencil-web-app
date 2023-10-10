@@ -1,4 +1,4 @@
-import SignUpForm from '../../components/auth/SignUpForm';
+import { SignUpForm } from '../../components/auth';
 import AuthPagesStyle from './AuthPages.module';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
