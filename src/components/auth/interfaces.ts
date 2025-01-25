@@ -5,19 +5,19 @@ export interface AuthContextType {
   loading: boolean;
   authenticated: boolean;
   unauthenticated: boolean;
-  login: ({email, password, remember_me}: LogInData) => Promise<void>; // Specify the function signature with arguments
+  login: ({email, password/*, remember_me*/}: LoginDataType) => Promise<void>; // Specify the function signature with arguments
   logout: () => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
-  newPassword: (email: string, code: string, password: string) => Promise<void>;
-  forgotPassword: (email: string) => Promise<void>;
+  // newPassword: (email: string, code: string, password: string) => Promise<void>;
+  // forgotPassword: (email: string) => Promise<void>;
   confirmRegister: (email: string, code: string) => Promise<void>;
-  resendCodeRegister: (email: string) => Promise<void>;
+  // resendCodeRegister: (email: string) => Promise<void>;
 };
 
-export interface LogInData {
+export interface LoginDataType {
   email: string;
   password: string;
-  remember_me?: boolean;
+  // remember_me?: boolean;
 }
 
 export interface SingUpForm {
@@ -47,10 +47,10 @@ export const INITIAL_SIGN_UP_DATA: SingUpForm = {
 };
 
 
-export const INITIAL_LOG_IN_DATA: LogInData = {
+export const INITIAL_LOG_IN_DATA: LoginDataType = {
   email: '',
   password: '',
-  remember_me: false,
+  // remember_me: false,
 };
 
 export interface ResetPasswordData {
@@ -88,7 +88,7 @@ export interface ProfessionProps extends Omit<BaseInputFieldsProps, 'value' | 'o
   value: string[];
 }
 
-export interface LocationState {
+export interface LocationState { //need to be changed, LocationState!! for SignUpForm data!!
   state: {
     data: SingUpForm | undefined;
   };

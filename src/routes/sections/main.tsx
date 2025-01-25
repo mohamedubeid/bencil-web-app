@@ -11,7 +11,7 @@ export const mainRoutes = [
     element: (
     <Suspense fallback={<SplashScreen />}>
       <Outlet />
-     </Suspense>
+    </Suspense>
   ),
   children:[
     { path: '/404', element: <Page404 />},

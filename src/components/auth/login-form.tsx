@@ -1,19 +1,23 @@
-import React, { useState } from 'react'
-import { Button, Checkbox, FormControlLabel, Stack} from '@mui/material'
-import { InputField } from '../ui/inputs'
+import React, { useState } from 'react';
+import { Button,/* Checkbox, FormControlLabel, */ Stack} from '@mui/material';
+import { InputField } from '../ui/inputs';
 import { PasswordTextField } from '../ui/inputs'
-import { INITIAL_LOG_IN_DATA, LogInData, } from './interfaces';
+import { INITIAL_LOG_IN_DATA, LoginDataType, } from './interfaces';
 import LoginDataSchema from '../../schema/LogIn.schema';
-import { Link } from '@mui/material';
-import { RouterLink } from '../../routes/components';
-import { useRouter } from '../../routes/hooks';
+// import { Link } from '@mui/material';
+// import { RouterLink } from '../../routes/components';
+import { useSearchParams, useRouter } from '../../routes/hooks';
 import { paths } from '../../routes/paths';
 
 const LoginForm: React.FC = () => {
 
   const router = useRouter();
 
-  const [ logInData, setLogInData ] = useState<LogInData>( INITIAL_LOG_IN_DATA );
+  const searchParams = useSearchParams();
+
+  const returnTo = searchParams.get('returnTo');
+
+  const [ logInData, setLogInData ] = useState<LoginDataType>( INITIAL_LOG_IN_DATA );
 
   const [ validationError, setValidationError ] = useState<{ [ key: string ]: string } | undefined>( undefined );
 
@@ -28,23 +32,27 @@ const LoginForm: React.FC = () => {
   const handleSubmit = ( event: React.FormEvent<HTMLFormElement> ) => {
     event.preventDefault();
     try {
-      const { error } = LoginDataSchema.validate( logInData, {
+      //check validation - done
+      const { error } = LoginDataSchema.validate( logInData, { 
         abortEarly: false,
       } );
       if ( !error ) {
         setValidationError( undefined );
+        //save login data in local storage
         setLogInData( INITIAL_LOG_IN_DATA );
-        router.replace('/');
-        return
+        // router.replace(paths.root);
+        //navigate to the root (home) page
+        router.replace(returnTo || paths.root);
+        return;
       } else {
         const newErrors: { [ key: string ]: string } = {};
         error.details.forEach( ( detail ) => {
-          const path = detail.path[ 0 ] as keyof LogInData;
+          const path = detail.path[ 0 ] as keyof LoginDataType;
           const message = detail.message;
           newErrors[ path ] = message;
         } );
         setValidationError( newErrors );
-        return
+        return;
       }
     } catch ( error ) {
       console.log( error );
@@ -69,7 +77,9 @@ const LoginForm: React.FC = () => {
         error={!!validationError?.password}
         helperText={validationError?.password || ''}
       />
-      <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-between' alignItems={{ xs: 'start', sm: 'center' }} spacing='16px'>
+            <Button variant='contained' size='large' type='submit' >Let's Go</Button>
+
+      {/* <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-between' alignItems={{ xs: 'start', sm: 'center' }} spacing='16px'>
         <FormControlLabel
           control={<Checkbox
             name="news_letter"
@@ -79,8 +89,7 @@ const LoginForm: React.FC = () => {
           label="Remember me"
         />
         <Link component={RouterLink} to={paths.auth.forgotPassword} >Forgot Password?</Link>
-      </Stack>
-      <Button variant='contained' size='large' type='submit' >Let's Go</Button>
+      </Stack> */}
     </Stack >
   )
 }

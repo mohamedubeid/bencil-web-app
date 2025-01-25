@@ -7,7 +7,7 @@ import awsconfig from '../../aws-exports';
 //
 import { AuthContext } from './auth-context';
 
-import { User, LogInData } from '../../components/auth/interfaces';
+import { User, LoginDataType } from '../../components/auth/interfaces';
 
 
 interface AuthProviderProps {
@@ -50,9 +50,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const initialize = useCallback(async () => {
     try {
-      const currentUser = await Auth.currentAuthenticatedUser();
+      // const currentUser = await Auth.currentAuthenticatedUser();
 
-      //check local storage for user data, and if it dosent exits send request to dynamo to get user data
+      const currentUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : await Auth.currentAuthenticatedUser();
 
       if (currentUser) {
         dispatch({
@@ -90,9 +90,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [initialize]);
 
   // LOGIN
-  const login = useCallback(async ({email, password, remember_me}: LogInData) => {
+  const login = useCallback(async ({email, password/*, remember_me*/}: LoginDataType) => {
     const currentUser = await Auth.signIn(email, password);
-
+    //i think here we need to add the user data to local storage write me code for that in aws im talking to you 
+    // localStorage.setItem('user', JSON.stringify(currentUser));
     dispatch({
       type: 'INITIAL',
       payload: {
@@ -123,9 +124,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   // RESEND CODE REGISTER
-  const resendCodeRegister = useCallback(async (email: string) => {
-    await Auth.resendSignUp(email);
-  }, []);
+  // const resendCodeRegister = useCallback(async (email: string) => {
+  //   await Auth.resendSignUp(email);
+  // }, []);
 
   // LOGOUT
   const logout = useCallback(async () => {
@@ -136,14 +137,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   // FORGOT PASSWORD
-  const forgotPassword = useCallback(async (email: string) => {
-    await Auth.forgotPassword(email);
-  }, []);
+  // const forgotPassword = useCallback(async (email: string) => {
+  //   await Auth.forgotPassword(email);
+  // }, []);
 
   // NEW PASSWORD
-  const newPassword = useCallback(async (email: string, code: string, password: string) => {
-    await Auth.forgotPasswordSubmit(email, code, password);
-  }, []);
+  // const newPassword = useCallback(async (email: string, code: string, password: string) => {
+  //   await Auth.forgotPasswordSubmit(email, code, password);
+  // }, []);
 
 
   const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
@@ -160,10 +161,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       login,
       logout,
       register,
-      newPassword,
-      forgotPassword,
+      // newPassword,
+      // forgotPassword,
       confirmRegister,
-      resendCodeRegister,
+      // resendCodeRegister,
     }),
     [
       status,
@@ -172,10 +173,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       login,
       logout,
       register,
-      newPassword,
-      forgotPassword,
+      // newPassword,
+      // forgotPassword,
       confirmRegister,
-      resendCodeRegister,
+      // resendCodeRegister,
     ]
   );
 

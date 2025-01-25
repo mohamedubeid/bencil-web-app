@@ -21,20 +21,13 @@ const ProfessionSelectField: React.FC<ProfessionProps> = ( {
   error
 } ) => {
   return (
-    <FormControl fullWidth size='small' error={error} >
+    <FormControl fullWidth size='small' error={error}>
       {value.length === 0 && (
         <InputLabel shrink={false} id="profession-label">
           {placeholder}
         </InputLabel>
       )}
-      <Select
-
-        id="profession"
-        multiple
-        name={name}
-        value={value}
-        onChange={onChange}
-        input={<OutlinedInput id="profession-select" />}
+      <Select id="profession" multiple name={name} value={value} onChange={onChange} input={<OutlinedInput id="profession-select" />}
         renderValue={( selected: string[] ) => (
           <Box display='flex' flexWrap='wrap' gap='4px'>
             {( selected as string[] ).map( ( value ) => (
@@ -42,14 +35,7 @@ const ProfessionSelectField: React.FC<ProfessionProps> = ( {
             ) )}
           </Box>
         )}
-        MenuProps={{
-          PaperProps: {
-            style: {
-              maxHeight: 224,
-            },
-          },
-        }}
-      >
+        MenuProps={{ PaperProps: {style: {maxHeight: 224}}}}>
         {professions.map( ( profession ) => (
           <MenuItem key={profession} value={profession} >
             <Checkbox

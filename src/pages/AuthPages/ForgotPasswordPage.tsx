@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from '@mui/material';
 import { RouterLink } from '../../routes/components';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { RefInputField } from "../../components/ui/inputs";
 import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
@@ -17,10 +17,10 @@ import { SimpleAlertMessageProps } from "../../components/ui/interfaces";
 import { handleSendingCode } from "./AuthUtils";
 import AuthPagesStyle from "./AuthPages.module";
 import { ResetPasswordData } from "../../components/auth/interfaces";
-import { RefPasswordTextField } from "../../components/ui/inputs";
 import { VERIFY_EMAIL_CODE_LENGTH } from "../../config/variables";
 import { paths } from "../../routes/paths";
-import { Helmet } from "react-helmet-async";
+import { RefPasswordTextField } from "../../components/ui/inputs";
+import { RefInputField } from "../../components/ui/inputs";
 
 
 const ForgotPasswordPage: React.FC = () => {

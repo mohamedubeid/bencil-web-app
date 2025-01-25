@@ -10,7 +10,7 @@ import { AuthLayout } from '../../components/auth';
 const LoginPage = lazy(() => import('../../pages/AuthPages/LoginPage'));
 const RegisterPage = lazy(() => import('../../pages/AuthPages/RegisterPage')); //change to register
 const VerifyEmailPage = lazy(() => import('../../pages/AuthPages/VerifyEmailPage'));
-const ForgotPasswordPage = lazy(() => import('../../pages/AuthPages/ForgotPasswordPage'));
+// const ForgotPasswordPage = lazy(() => import('../../pages/AuthPages/ForgotPasswordPage'));
 
 
 
@@ -39,12 +39,12 @@ export const authRoutes = [{
           <RegisterPage />
       ),
     },
-    {
-      path: 'forgot-password',
-      element: (
-        <ForgotPasswordPage />
-      ),
-    },
+    // {
+    //   path: 'forgot-password',
+    //   element: (
+    //     <ForgotPasswordPage />
+    //   ),
+    // },
     {
       path: 'verify-email',
       element: (

@@ -75,7 +75,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ( { formData } ) => {
       if ( !error ) {
         setValidationError( undefined );
         setSignUpData( INITIAL_SIGN_UP_DATA );
-        const data = {...signUpData, username: `@${signUpData.username}`} as SingUpForm
+        const data = {...signUpData, username: `@${signUpData.username}`} as SingUpForm;
         router.push('/auth/verify-email', {state: {data} } as LocationState);
         return;
       } else {
@@ -107,14 +107,14 @@ const SignUpForm: React.FC<SignUpFormProps> = ( { formData } ) => {
           value={signUpData.first_name}
           onChange={handleInputChange}
           error={!!validationError?.first_name}
-          helperText={validationError?.first_name || ''} />
+          helperText={validationError?.first_name || ''}/>
         <InputField
           placeholder='Last Name'
           name='last_name'
           value={signUpData.last_name}
           onChange={handleInputChange}
           error={!!validationError?.last_name}
-          helperText={validationError?.last_name || ''} />
+          helperText={validationError?.last_name || ''}/>
       </Stack>
       <InputField
         placeholder='Email'
@@ -122,7 +122,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ( { formData } ) => {
         value={signUpData.email}
         onChange={handleInputChange}
         error={!!validationError?.email}
-        helperText={validationError?.email || ''} />
+        helperText={validationError?.email || ''}/>
       <PasswordTextField
         placeholder='Password'
         name='password'
@@ -152,7 +152,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ( { formData } ) => {
         onChange={handleProfessionChange}
         handleCheckboxChange={handleCheckboxChange}
         error={!!validationError?.professions}
-        helperText={validationError?.professions || ''} />
+        helperText={validationError?.professions || ''}/>
       <InputField
         placeholder='Birth Date'
         type='date'

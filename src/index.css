@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+/* best practice is to import it from index.html file */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap'); 
+
 * {
   margin: 0;
   padding: 0;
@@ -7,9 +9,8 @@
 }
 a {
   /* Add your custom styles for the Link component here */
-  color: #000; /* Example: changing the link color to black */
+  color: #000; /* changing the link color to black */
   text-decoration: none;
-  /* ... add more styles as needed */
 }
 
 ::-webkit-scrollbar {

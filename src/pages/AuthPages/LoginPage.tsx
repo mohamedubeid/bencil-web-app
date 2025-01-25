@@ -13,7 +13,7 @@ const LoginPage: React.FC = () => {
     <>
       <Helmet><title>Login</title></Helmet>
       <Box>
-        <Typography variant="h1" mt='80px' textAlign='center'  > Welcome Back!</Typography>
+        <Typography variant="h1" mt='80px' textAlign='center'>Welcome Back!</Typography>
         <Typography variant="subtitle2" textAlign='center' color='secondary.dark'>The more you watch, the more you grow professionally.</Typography>
         <LoginForm />
         <Typography variant='subtitle1' color='secondary.dark' textAlign='center' mt='32px'>Don't have an account?

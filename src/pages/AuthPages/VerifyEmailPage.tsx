@@ -7,7 +7,7 @@ import { SimpleAlertMessage } from '../../components/ui';
 import { SimpleAlertMessageProps } from '../../components/ui/interfaces';
 import { VerificationCodeInput } from '../../components/auth';
 import { SingUpForm, LocationState } from '../../components/auth/interfaces';
-import { handleSendingCode } from './AuthUtils';
+// import { handleSendingCode } from './AuthUtils';
 import { VERIFY_EMAIL_CODE_LENGTH } from "../../config/variables";
 import { useRouter, useLocation } from '../../routes/hooks';
 import { Helmet } from 'react-helmet-async';
@@ -81,9 +81,9 @@ const VerifyEmailPage = () => {
       } ) );
     }
   }
-  const handleGetAnotherCode = () => {
-    handleSendingCode( setAnotherCodeAlrt );
-  }
+    // const handleGetAnotherCode = () => {
+    //   handleSendingCode( setAnotherCodeAlrt );
+    // }
 
   const handleWrongEmail = () => {
     const data = { ...signUpData, username: signUpData?.username.substring( 1 ) };
@@ -93,14 +93,13 @@ const VerifyEmailPage = () => {
 
   useEffect( () => { //to prevent user go to this page unless he fill the signup form
     if ( signUpData === undefined ) {
-      // navigate( '/auth/signup', { replace: true } );
       router.replace('/auth/register');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [] )
 
   return (
-   <>
+  <>
     <Helmet><title>Verify Email</title></Helmet>
     <Stack textAlign='center' mt={6} spacing={3}>
       <Typography variant="h2" > Verify your Email address</Typography>
@@ -118,11 +117,11 @@ const VerifyEmailPage = () => {
       </Stack>
       <Typography variant='h3' mt={8} >
         Still no code?
-        <Button variant='text' disableRipple sx={classes.get_another_code} onClick={handleGetAnotherCode} >Get another one</Button>
+        {/* <Button variant='text' disableRipple sx={classes.get_another_code} onClick={handleGetAnotherCode} >Get another one</Button> */}
       </Typography>
       <SimpleAlertMessage message={anotherCodeAlrt.message} severity={anotherCodeAlrt.severity} handleClose={handleCloseAnotherCodeAlrt} open={anotherCodeAlrt.open} />
     </Stack >
-   </>
+  </>
   );
 };
 export default VerifyEmailPage;
