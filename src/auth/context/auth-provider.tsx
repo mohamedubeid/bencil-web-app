@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useCallback, useMemo } from 'react';
 // import { Auth } from '@aws-amplify';
-import { Auth, Amplify } from 'aws-amplify';
+// import { Auth, Amplify } from 'aws-amplify';
 
 // config
 import awsconfig from '../../aws-exports';
@@ -43,7 +43,7 @@ const reducer = (state: State, action: Action) => {
 };
 
 
-Amplify.configure(awsconfig);
+// Amplify.configure(awsconfig);
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -52,7 +52,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       // const currentUser = await Auth.currentAuthenticatedUser();
 
-      const currentUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : await Auth.currentAuthenticatedUser();
+      const currentUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : /*await Auth.currentAuthenticatedUser();*/ null;
 
       if (currentUser) {
         dispatch({
@@ -90,38 +90,43 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [initialize]);
 
   // LOGIN
-  const login = useCallback(async ({email, password/*, remember_me*/}: LoginDataType) => {
-    const currentUser = await Auth.signIn(email, password);
-    //i think here we need to add the user data to local storage write me code for that in aws im talking to you 
-    // localStorage.setItem('user', JSON.stringify(currentUser));
-    dispatch({
-      type: 'INITIAL',
-      payload: {
-        user: {
-          ...currentUser,
-          id: currentUser.attributes.sub,
-          // displayName: `${currentUser.attributes.given_name} ${currentUser.attributes.family_name}`,
-          // role: 'admin',
-        },
-      },
-    });
-  }, []);
+  const login = () => {}
+  // const login = useCallback(async ({email, password/*, remember_me*/}: LoginDataType) => {
+  //   const currentUser = await Auth.signIn(email, password);
+  //   //i think here we need to add the user data to local storage write me code for that in aws im talking to you 
+  //   // localStorage.setItem('user', JSON.stringify(currentUser));
+  //   dispatch({
+  //     type: 'INITIAL',
+  //     payload: {
+  //       user: {
+  //         ...currentUser,
+  //         id: currentUser.attributes.sub,
+  //         // displayName: `${currentUser.attributes.given_name} ${currentUser.attributes.family_name}`,
+  //         // role: 'admin',
+  //       },
+  //     },
+  //   });
+  // }, []);
 
   // REGISTER
-  const register = useCallback(async (email: string, password: string) => {
-    await Auth.signUp({
-      username: email,
-      password: password,
-      autoSignIn: {
-        enabled: true,
-      },
-    });
-  }, []);
+  const register = () => {}
+
+  // const register = useCallback(async (email: string, password: string) => {
+  //   await Auth.signUp({
+  //     username: email,
+  //     password: password,
+  //     autoSignIn: {
+  //       enabled: true,
+  //     },
+  //   });
+  // }, []);
 
   // CONFIRM REGISTER
-  const confirmRegister = useCallback(async (email: string, code: string) => {
-    await Auth.confirmSignUp(email, code);
-  }, []);
+  const confirmRegister = () => {}
+
+  // const confirmRegister = useCallback(async (email: string, code: string) => {
+  //   await Auth.confirmSignUp(email, code);
+  // }, []);
 
   // RESEND CODE REGISTER
   // const resendCodeRegister = useCallback(async (email: string) => {
@@ -129,12 +134,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // }, []);
 
   // LOGOUT
-  const logout = useCallback(async () => {
-    await Auth.signOut();
-    dispatch({
-      type: 'LOGOUT',
-    });
-  }, []);
+  const logout = () => {}
+  // const logout = useCallback(async () => {
+  //   await Auth.signOut();
+  //   dispatch({
+  //     type: 'LOGOUT',
+  //   });
+  // }, []);
 
   // FORGOT PASSWORD
   // const forgotPassword = useCallback(async (email: string) => {

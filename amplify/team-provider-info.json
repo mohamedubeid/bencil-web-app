@@ -1,21 +1,15 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-bencilwebapp-dev-162152-authRole",
-      "UnauthRoleArn": "arn:aws:iam::554120661701:role/amplify-bencilwebapp-dev-162152-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::554120661701:role/amplify-bencilwebapp-dev-162152-authRole",
+      "AuthRoleName": "amplify-bencilwebapp-dev-c7b37-authRole",
+      "UnauthRoleArn": "arn:aws:iam::554120661701:role/amplify-bencilwebapp-dev-c7b37-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::554120661701:role/amplify-bencilwebapp-dev-c7b37-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-bencilwebapp-dev-162152-deployment",
-      "UnauthRoleName": "amplify-bencilwebapp-dev-162152-unauthRole",
-      "StackName": "amplify-bencilwebapp-dev-162152",
-      "StackId": "arn:aws:cloudformation:us-east-1:554120661701:stack/amplify-bencilwebapp-dev-162152/196c2220-0ddb-11ee-a915-0abf70a9bcef",
-      "AmplifyAppId": "d2xt8legoi25gc"
-    },
-    "categories": {
-      "auth": {
-        "bencilwebapp8a672d8c": {},
-        "bencilwebapp": {}
-      }
+      "DeploymentBucketName": "amplify-bencilwebapp-dev-c7b37-deployment",
+      "UnauthRoleName": "amplify-bencilwebapp-dev-c7b37-unauthRole",
+      "StackName": "amplify-bencilwebapp-dev-c7b37",
+      "StackId": "arn:aws:cloudformation:us-east-1:554120661701:stack/amplify-bencilwebapp-dev-c7b37/19219680-db46-11ef-a12f-0afff28b3031",
+      "AmplifyAppId": "d1o4u1hj3eb5y7"
     }
   }
 }
